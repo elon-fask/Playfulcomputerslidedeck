@@ -1,7 +1,8 @@
 {
     "name": "Playful Computer Slide Deck",
     "version": "0.1.0",
-    "private": true,
+    "homepage": "elon-fask.github.io",
+    "private": false,
     "dependencies": {
         "@radix-ui/react-accordion": "^1.2.3",
         "@radix-ui/react-alert-dialog": "^1.1.6",
