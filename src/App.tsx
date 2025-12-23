@@ -13,6 +13,11 @@ import { ConclusionSlide } from './components/ConclusionSlide';
 import { QASlide } from './components/QASlide';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
+import { AdvancedCPUSlide } from './components/AdvancedCPUSlide';
+import { AdvancedMemorySlide } from './components/AdvancedMemorySlide';
+import { AdvancedGPUSlide } from './components/AdvancedGPUSlide';
+import { AdvancedImageProcessingSlide } from './components/AdvancedImageProcessingSlide';
+
 export default function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -22,11 +27,15 @@ export default function App() {
     <GeneralDescriptionSlide key="generalDescription" />,
     <AdvancedComputersSlide key="advancedComputers" />,
     <HardwareSlide key="hardware" />,
+    <AdvancedCPUSlide key="advancedCPU" />,
+    <AdvancedMemorySlide key="advancedMemory" />,
     <SoftwareSlide key="software" />,
     <InteractiveSlide key="interactive" />,
     <GPUSlide key="gpu" />,
+    <AdvancedGPUSlide key="advancedGPU" />,
     <ScreenSlide key="screen" />,
     <ImageProcessingSlide key="imageProcessing" />,
+    <AdvancedImageProcessingSlide key="advancedImageProcessing" />,
     <ConclusionSlide key="conclusion" />,
     <QASlide key="qa" />
   ];
@@ -73,11 +82,10 @@ export default function App() {
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all ${
-                currentSlide === index
+              className={`w-3 h-3 rounded-full transition-all ${currentSlide === index
                   ? 'bg-purple-500 w-8'
                   : 'bg-gray-300 hover:bg-gray-400'
-              }`}
+                }`}
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
