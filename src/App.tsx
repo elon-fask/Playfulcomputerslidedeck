@@ -1,22 +1,16 @@
 import React, { useState } from 'react';
-import { TitleSlide } from './components/TitleSlide';
-import { IntroSlide } from './components/IntroSlide';
-import { GeneralDescriptionSlide } from './components/GeneralDescriptionSlide';
-import { AdvancedComputersSlide } from './components/AdvancedComputersSlide';
-import { HardwareSlide } from './components/HardwareSlide';
-import { SoftwareSlide } from './components/SoftwareSlide';
-import { InteractiveSlide } from './components/InteractiveSlide';
-import { GPUSlide } from './components/GPUSlide';
-import { ScreenSlide } from './components/ScreenSlide';
-import { ImageProcessingSlide } from './components/ImageProcessingSlide';
-import { ConclusionSlide } from './components/ConclusionSlide';
-import { QASlide } from './components/QASlide';
+import { TitleSlide } from './components/pro/TitleSlide';
+import { IntroSlide } from './components/pro/IntroSlide';
+import { ExpansionCardsSlide } from './components/pro/ExpansionCardsSlide';
+import { InternalComponentsSlide } from './components/pro/InternalComponentsSlide';
+import { InternalConnectorsSlide } from './components/pro/InternalConnectorsSlide';
+import { ExternalPortsSlide } from './components/pro/ExternalPortsSlide';
+import { ComparisonSlide } from './components/pro/ComparisonSlide';
+import { PracticalTipsSlide } from './components/pro/PracticalTipsSlide';
+import { CaseStudySlide } from './components/pro/CaseStudySlide';
+import { QASlide } from './components/pro/QASlide';
+import { ConclusionSlide } from './components/pro/ConclusionSlide';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-
-import { AdvancedCPUSlide } from './components/AdvancedCPUSlide';
-import { AdvancedMemorySlide } from './components/AdvancedMemorySlide';
-import { AdvancedGPUSlide } from './components/AdvancedGPUSlide';
-import { AdvancedImageProcessingSlide } from './components/AdvancedImageProcessingSlide';
 
 export default function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -24,18 +18,13 @@ export default function App() {
   const slides = [
     <TitleSlide key="title" />,
     <IntroSlide key="intro" />,
-    <GeneralDescriptionSlide key="generalDescription" />,
-    <AdvancedComputersSlide key="advancedComputers" />,
-    <HardwareSlide key="hardware" />,
-    <AdvancedCPUSlide key="advancedCPU" />,
-    <AdvancedMemorySlide key="advancedMemory" />,
-    <SoftwareSlide key="software" />,
-    <InteractiveSlide key="interactive" />,
-    <GPUSlide key="gpu" />,
-    <AdvancedGPUSlide key="advancedGPU" />,
-    <ScreenSlide key="screen" />,
-    <ImageProcessingSlide key="imageProcessing" />,
-    <AdvancedImageProcessingSlide key="advancedImageProcessing" />,
+    <ExpansionCardsSlide key="expansion" />,
+    <InternalComponentsSlide key="internal" />,
+    <InternalConnectorsSlide key="connectors" />,
+    <ExternalPortsSlide key="ports" />,
+    <ComparisonSlide key="comparison" />,
+    <PracticalTipsSlide key="tips" />,
+    <CaseStudySlide key="case" />,
     <ConclusionSlide key="conclusion" />,
     <QASlide key="qa" />
   ];
@@ -57,20 +46,20 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-400 via-pink-300 to-blue-400 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex flex-col">
       {/* Main Slide Area */}
       <div className="flex-1 flex items-center justify-center p-8">
-        <div className="w-full max-w-6xl">
+        <div className="w-full max-w-7xl">
           {slides[currentSlide]}
         </div>
       </div>
 
       {/* Navigation Controls */}
-      <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 flex items-center gap-4 bg-white rounded-full px-6 py-3 shadow-lg">
+      <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 flex items-center gap-4 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 shadow-2xl border border-white/20">
         <button
           onClick={prevSlide}
           disabled={currentSlide === 0}
-          className="p-2 rounded-full bg-purple-500 text-white disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-purple-600 transition-colors"
+          className="p-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white disabled:opacity-30 disabled:cursor-not-allowed hover:scale-110 transition-all shadow-lg"
           aria-label="Previous slide"
         >
           <ChevronLeft className="w-6 h-6" />
@@ -82,10 +71,11 @@ export default function App() {
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all ${currentSlide === index
-                  ? 'bg-purple-500 w-8'
-                  : 'bg-gray-300 hover:bg-gray-400'
-                }`}
+              className={`h-2 rounded-full transition-all ${
+                currentSlide === index
+                  ? 'bg-gradient-to-r from-blue-500 to-purple-600 w-8'
+                  : 'bg-white/30 hover:bg-white/50 w-2'
+              }`}
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
@@ -94,7 +84,7 @@ export default function App() {
         <button
           onClick={nextSlide}
           disabled={currentSlide === slides.length - 1}
-          className="p-2 rounded-full bg-purple-500 text-white disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-purple-600 transition-colors"
+          className="p-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white disabled:opacity-30 disabled:cursor-not-allowed hover:scale-110 transition-all shadow-lg"
           aria-label="Next slide"
         >
           <ChevronRight className="w-6 h-6" />
@@ -102,9 +92,16 @@ export default function App() {
       </div>
 
       {/* Slide Counter */}
-      <div className="fixed top-8 right-8 bg-white rounded-full px-4 py-2 shadow-md">
-        <span className="text-purple-600">
+      <div className="fixed top-8 right-8 bg-white/10 backdrop-blur-xl rounded-full px-5 py-2 shadow-lg border border-white/20">
+        <span className="text-white font-mono">
           {currentSlide + 1} / {slides.length}
+        </span>
+      </div>
+
+      {/* Presentation Info */}
+      <div className="fixed top-8 left-8 bg-white/10 backdrop-blur-xl rounded-full px-5 py-2 shadow-lg border border-white/20">
+        <span className="text-white/80 text-sm">
+          Computer Components & Connectors
         </span>
       </div>
     </div>

@@ -8,10 +8,10 @@ export function GPUSlide() {
         {/* Header */}
         <div className="text-center mb-8">
           <h2 className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 mb-4">
-            Meet the GPU: The Digital Artist 🎨
+            Meet the GPU: The Art Artist! 🎨
           </h2>
           <p className="text-2xl text-gray-600">
-            Graphics Processing Unit - The Creative Genius Inside Your Computer!
+            Graphics Processing Unit - The computer's super-fast painter!
           </p>
         </div>
 
@@ -29,7 +29,7 @@ export function GPUSlide() {
                 <Sparkles className="w-8 h-8 text-white" />
               </div>
             </div>
-
+            
             <div className="bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl p-6">
               <p className="text-xl text-gray-700">
                 <span className="text-2xl">🖼️</span> This is a <span className="text-purple-600">Graphics Card</span> (GPU)!<br />
@@ -63,7 +63,7 @@ export function GPUSlide() {
             <div className="bg-yellow-100 rounded-xl p-4 border-2 border-yellow-300">
               <p className="text-lg text-gray-800">
                 <span className="text-2xl">⚡</span> <span className="font-semibold">Speed Fact:</span><br />
-                A GPU can draw millions of pixels in less than a blink!
+                A GPU can draw millions of pixels in less than a blink! 
               </p>
             </div>
           </div>
@@ -121,35 +121,20 @@ export function GPUSlide() {
         </div>
 
         {/* How It Works */}
-        <div className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl p-8 text-black">
+        <div className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl p-8 text-white">
           <h3 className="text-white text-center mb-6">How Does GPU Work? 🔧</h3>
-
-          <div className="grid md:grid-cols-2 gap-6 mb-6">
-            <div className="bg-white bg-opacity-20 backdrop-blur rounded-xl p-6">
-              <h4 className="text-xl font-bold mb-2">1. The Setup (CPU)</h4>
-              <p>Imagine the CPU is like the <strong>Architect</strong>. It draws the blueprints and says "I want a building here, a tree there, and a character here." It doesn't paint them; it just outlines the plan.</p>
-            </div>
-            <div className="bg-white bg-opacity-20 backdrop-blur rounded-xl p-6">
-              <h4 className="text-xl font-bold mb-2">2. The Order (Command)</h4>
-              <p>The CPU passes this "blueprint" to the GPU. It says, "Okay, Artist, make this look real. Add colors, shadows, and light!"</p>
-            </div>
-          </div>
-
           <div className="grid md:grid-cols-3 gap-4">
             <div className="bg-white bg-opacity-20 backdrop-blur rounded-xl p-4 text-center">
-              <div className="text-4xl mb-2">⚡</div>
-              <p className="text-lg font-bold">Parallel Power</p>
-              <p className="text-sm">The GPU uses thousands of tiny "workers" (cores) to paint every single pixel at the exact same time.</p>
+              <div className="text-4xl mb-2">1️⃣</div>
+              <p className="text-lg">CPU sends an image job to GPU</p>
             </div>
             <div className="bg-white bg-opacity-20 backdrop-blur rounded-xl p-4 text-center">
-              <div className="text-4xl mb-2">🔄</div>
-              <p className="text-lg font-bold">Lighting & Shading</p>
-              <p className="text-sm">It calculates how light hits objects, making them look 3D and realistic instantly.</p>
+              <div className="text-4xl mb-2">2️⃣</div>
+              <p className="text-lg">GPU splits the work into tiny pieces</p>
             </div>
             <div className="bg-white bg-opacity-20 backdrop-blur rounded-xl p-4 text-center">
-              <div className="text-4xl mb-2">🎬</div>
-              <p className="text-lg font-bold">The Show</p>
-              <p className="text-sm">It sends the finished picture to your screen 60 to 144 times every second!</p>
+              <div className="text-4xl mb-2">3️⃣</div>
+              <p className="text-lg">Thousands of cores work at the same time!</p>
             </div>
           </div>
         </div>

@@ -10,28 +10,9 @@ export function ScreenSlide() {
           <h2 className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-green-600 to-yellow-600 mb-4">
             How Does Your Screen Work? 📺
           </h2>
-          <p className="text-2xl text-gray-600 mb-8">
-            Millions of tiny lights working together to show you images.
+          <p className="text-2xl text-gray-600">
+            It's like a magic light painting board!
           </p>
-        </div>
-
-        {/* Where Do We Use This? Section */}
-        <div className="mb-12">
-          <h3 className="text-center text-gray-800 mb-6 font-bold text-2xl">Where Do We Use This? 🌍</h3>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-blue-50 rounded-xl p-6 border-l-4 border-blue-500 shadow-sm hover:shadow-md transition-shadow">
-              <h4 className="font-bold text-lg text-blue-800 mb-2">Smartphones 📱</h4>
-              <p className="text-gray-700">High-resolution screens that fit in your pocket.</p>
-            </div>
-            <div className="bg-green-50 rounded-xl p-6 border-l-4 border-green-500 shadow-sm hover:shadow-md transition-shadow">
-              <h4 className="font-bold text-lg text-green-800 mb-2">Monitors & TVs 🖥️</h4>
-              <p className="text-gray-700">Large displays for work, gaming, and entertainment.</p>
-            </div>
-            <div className="bg-purple-50 rounded-xl p-6 border-l-4 border-purple-500 shadow-sm hover:shadow-md transition-shadow">
-              <h4 className="font-bold text-lg text-purple-800 mb-2">Digital Signs 🏙️</h4>
-              <p className="text-gray-700">Billboards and information kiosks use this same tech.</p>
-            </div>
-          </div>
         </div>
 
         {/* Main Content */}
@@ -98,7 +79,7 @@ export function ScreenSlide() {
             <div className="bg-yellow-100 rounded-xl p-4 border-2 border-yellow-300">
               <p className="text-lg text-gray-800">
                 <span className="text-2xl">🤯</span> <span className="font-semibold">Mind-Blowing:</span><br />
-                A typical screen has over 2 MILLION pixels working together!
+                A typical screen has over 2 MILLION pixels working together! 
               </p>
             </div>
           </div>
@@ -110,7 +91,7 @@ export function ScreenSlide() {
           <p className="text-center text-xl text-gray-700 mb-6">
             Each pixel has 3 tiny lights: <span className="text-red-600">Red</span>, <span className="text-green-600">Green</span>, and <span className="text-blue-600">Blue</span>!
           </p>
-
+          
           <div className="grid md:grid-cols-3 gap-4">
             <div className="bg-white rounded-xl p-6 text-center">
               <div className="w-16 h-16 bg-red-500 rounded-full mx-auto mb-3"></div>

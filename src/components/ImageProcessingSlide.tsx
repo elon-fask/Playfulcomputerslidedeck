@@ -41,7 +41,7 @@ export function ImageProcessingSlide() {
             <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-6 border-2 border-purple-200">
               <h4 className="text-gray-800 mb-3">📸 Photo Editing Magic!</h4>
               <p className="text-gray-700">
-                The computer changes each pixel's color to make your photos look awesome!
+                The computer changes each pixel's color to make your photos look awesome! 
                 Brighter, darker, or add cool filters! 🌈
               </p>
             </div>
@@ -62,7 +62,7 @@ export function ImageProcessingSlide() {
             <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-xl p-6 border-2 border-blue-200">
               <h4 className="text-gray-800 mb-3">🎮 Game Graphics!</h4>
               <p className="text-gray-700">
-                The GPU draws and processes thousands of images per second to make games look real and smooth!
+                The GPU draws and processes thousands of images per second to make games look real and smooth! 
               </p>
             </div>
           </div>
@@ -188,7 +188,7 @@ export function ImageProcessingSlide() {
         </div>
 
         {/* Real World Uses */}
-        <div className="bg-gradient-to-r from-green-500 to-blue-500 rounded-2xl p-8 text-black mb-8">
+        <div className="bg-gradient-to-r from-green-500 to-blue-500 rounded-2xl p-8 text-white mb-8">
           <h3 className="text-white text-center mb-6">Where Do We Use This? 🌍</h3>
           <div className="grid md:grid-cols-2 gap-4">
             <div className="bg-white bg-opacity-20 backdrop-blur rounded-lg p-4">
