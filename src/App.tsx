@@ -85,8 +85,8 @@ export default function App() {
               key={index}
               onClick={() => goToSlide(index)}
               className={`h-2 rounded-full transition-all ${currentSlide === index
-                  ? 'bg-gradient-to-r from-blue-500 to-purple-600 w-8'
-                  : 'bg-white/30 hover:bg-white/50 w-2'
+                ? 'bg-gradient-to-r from-blue-500 to-purple-600 w-8'
+                : 'bg-white/30 hover:bg-white/50 w-2'
                 }`}
               aria-label={`Go to slide ${index + 1}`}
             />

@@ -3,20 +3,20 @@ import { Volume2, Wifi, Video, Database, Usb } from 'lucide-react';
 
 export function ExpansionCardsSlide() {
   const [selectedCard, setSelectedCard] = useState<number | null>(null);
-  
+
   const cards = [
     {
       icon: Volume2,
-      title: 'Carte Son',
-      subtitle: 'Sound Card',
+      title: 'Sound Card',
+      subtitle: 'Carte Son',
       description: 'Processes audio signals with high fidelity. Essential for professional audio work and immersive gaming experiences.',
       useCase: 'Gaming, music production, studio recording',
       color: 'from-blue-500 to-cyan-500'
     },
     {
       icon: Wifi,
-      title: 'Carte Réseau',
-      subtitle: 'Network Card',
+      title: 'Network Card',
+      subtitle: 'Carte Réseau',
       description: 'Enables wired (Ethernet) or wireless (Wi-Fi) connectivity. Critical for networking and online operations.',
       useCase: 'Servers, online gaming, enterprise networking',
       color: 'from-purple-500 to-pink-500'
@@ -51,7 +51,7 @@ export function ExpansionCardsSlide() {
     <div className="relative min-h-[600px] rounded-3xl overflow-hidden shadow-2xl">
       {/* Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#1E90FF] via-purple-600 to-[#FF4500]" />
-      
+
       {/* Content Container */}
       <div className="relative h-full min-h-[600px] overflow-y-auto">
         <div className="p-12">
@@ -61,7 +61,7 @@ export function ExpansionCardsSlide() {
             <p className="text-white/80 text-xl">Expansion Cards: Plug-and-Play Upgrades</p>
             <div className="h-1 w-24 bg-white/50 mx-auto mt-4 rounded-full" />
           </div>
-          
+
           {/* Cards Grid */}
           <div className="max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             {cards.map((card, index) => (
@@ -70,25 +70,24 @@ export function ExpansionCardsSlide() {
                 onClick={() => setSelectedCard(selectedCard === index ? null : index)}
                 className="group cursor-pointer"
               >
-                <div className={`bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20 transition-all duration-300 ${
-                  selectedCard === index 
-                    ? 'bg-white/20 scale-105 shadow-2xl' 
+                <div className={`bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20 transition-all duration-300 ${selectedCard === index
+                    ? 'bg-white/20 scale-105 shadow-2xl'
                     : 'hover:bg-white/15 hover:scale-102'
-                }`}>
+                  }`}>
                   {/* Icon */}
                   <div className={`bg-gradient-to-br ${card.color} rounded-xl p-4 mb-4 inline-block shadow-lg`}>
                     <card.icon className="w-8 h-8 text-white" />
                   </div>
-                  
+
                   {/* Title */}
                   <h3 className="text-white text-xl mb-1">{card.title}</h3>
                   <p className="text-white/60 text-sm mb-3">{card.subtitle}</p>
-                  
+
                   {/* Description */}
                   <p className="text-white/90 text-sm mb-4">
                     {card.description}
                   </p>
-                  
+
                   {/* Use Case - Shown on selection */}
                   {selectedCard === index && (
                     <div className="bg-white/10 rounded-xl p-4 mt-4 border border-white/30 animate-fadeIn">
@@ -96,7 +95,7 @@ export function ExpansionCardsSlide() {
                       <p className="text-white text-sm">{card.useCase}</p>
                     </div>
                   )}
-                  
+
                   {/* Click Indicator */}
                   <div className="text-white/50 text-xs mt-4">
                     {selectedCard === index ? 'Click to collapse' : 'Click to expand'}
@@ -105,7 +104,7 @@ export function ExpansionCardsSlide() {
               </div>
             ))}
           </div>
-          
+
           {/* Comparison Table */}
           <div className="max-w-6xl mx-auto">
             <div className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 overflow-hidden">
