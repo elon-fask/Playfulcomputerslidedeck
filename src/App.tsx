@@ -23,9 +23,9 @@ export default function App() {
 
   const slides = [
     <TitleSlide key="title" />,
-    <IntroSlide key="intro" />,
-    <GeneralDescriptionSlide key="generalDescription" />,
-    <AdvancedComputersSlide key="advancedComputers" />,
+    // <IntroSlide key="intro" />,
+    // <GeneralDescriptionSlide key="generalDescription" />,
+    // <AdvancedComputersSlide key="advancedComputers" />,
     <HardwareSlide key="hardware" />,
     <AdvancedCPUSlide key="advancedCPU" />,
     <AdvancedMemorySlide key="advancedMemory" />,
@@ -34,8 +34,8 @@ export default function App() {
     <GPUSlide key="gpu" />,
     <AdvancedGPUSlide key="advancedGPU" />,
     <ScreenSlide key="screen" />,
-    <ImageProcessingSlide key="imageProcessing" />,
     <AdvancedImageProcessingSlide key="advancedImageProcessing" />,
+    <ImageProcessingSlide key="imageProcessing" />,
     <ConclusionSlide key="conclusion" />,
     <QASlide key="qa" />
   ];
@@ -83,8 +83,8 @@ export default function App() {
               key={index}
               onClick={() => goToSlide(index)}
               className={`w-3 h-3 rounded-full transition-all ${currentSlide === index
-                  ? 'bg-purple-500 w-8'
-                  : 'bg-gray-300 hover:bg-gray-400'
+                ? 'bg-purple-500 w-8'
+                : 'bg-gray-300 hover:bg-gray-400'
                 }`}
               aria-label={`Go to slide ${index + 1}`}
             />

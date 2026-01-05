@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Presentation, Monitor, History, Maximize2, Sun, Moon, Sparkles } from 'lucide-react';
+import { Presentation, Monitor, History, Maximize2, Sun, Moon, Sparkles, Settings, Layout, Monitor as MonitorIcon } from 'lucide-react';
 
 interface PresentationData {
     id: number;
@@ -53,7 +53,7 @@ export default function PresentationDashboard() {
     };
 
     // Animation variants
-    const containerVariants = {
+    const containerVariants: import('framer-motion').Variants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
@@ -63,7 +63,7 @@ export default function PresentationDashboard() {
         }
     };
 
-    const cardVariants = {
+    const cardVariants: import('framer-motion').Variants = {
         hidden: {
             opacity: 0,
             y: 50,
@@ -90,14 +90,15 @@ export default function PresentationDashboard() {
         }
     };
 
-    const headerVariants = {
-        hidden: { opacity: 0, y: -50 },
+    const headerVariants: import('framer-motion').Variants = {
+        hidden: { opacity: 0, scale: 0.8 },
         visible: {
             opacity: 1,
-            y: 0,
+            scale: 1,
             transition: {
                 type: "spring",
-                stiffness: 100
+                stiffness: 100,
+                damping: 10
             }
         }
     };
@@ -152,61 +153,90 @@ export default function PresentationDashboard() {
                 </AnimatePresence>
             </motion.button>
 
-            <div className="relative z-10 p-8 min-h-screen">
-                {/* Header */}
-                <motion.header
-                    className="text-center mb-16"
-                    variants={headerVariants}
-                    initial="hidden"
-                    animate="visible"
-                >
-                    <motion.div
-                        className="flex items-center justify-center gap-4 mb-6"
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
-                    >
+            {/* Header Section with 3D Model */}
+            <motion.header
+                className="max-w-7xl mx-auto mb-16 relative"
+                variants={headerVariants}
+                initial="hidden"
+                animate="visible"
+            >
+                <div className="flex flex-col lg:flex-row items-center gap-12">
+                    <div className="flex-1 text-center lg:text-left">
                         <motion.div
-                            animate={{
-                                rotate: [0, 360],
-                                scale: [1, 1.2, 1]
-                            }}
-                            transition={{
-                                duration: 3,
-                                repeat: Infinity,
-                                ease: "linear"
-                            }}
+                            className="flex items-center justify-center lg:justify-start gap-4 mb-6"
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
                         >
-                            <Sparkles className="w-12 h-12 text-cyan-400" />
+                            <motion.div
+                                animate={{
+                                    rotate: [0, 360],
+                                    scale: [1, 1.2, 1]
+                                }}
+                                transition={{
+                                    duration: 3,
+                                    repeat: Infinity,
+                                    ease: "linear"
+                                }}
+                            >
+                                <Sparkles className="w-12 h-12 text-cyan-400" />
+                            </motion.div>
+                            <h1 className="text-6xl lg:text-7xl font-black text-white drop-shadow-2xl">
+                                Nexus <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-red-500">Dashboard</span>
+                            </h1>
                         </motion.div>
-                        <h1 className="text-6xl font-bold text-white drop-shadow-lg">
-                            Presentation Dashboard
-                        </h1>
-                        <motion.div
-                            animate={{
-                                rotate: [360, 0],
-                                scale: [1, 1.2, 1]
-                            }}
-                            transition={{
-                                duration: 3,
-                                repeat: Infinity,
-                                ease: "linear"
-                            }}
+                        <motion.p
+                            className="text-2xl text-white/90 flex items-center justify-center lg:justify-start gap-3 mb-8"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.4 }}
                         >
-                            <Sparkles className="w-12 h-12 text-pink-400" />
-                        </motion.div>
-                    </motion.div>
-                    <motion.p
-                        className="text-2xl text-white/90 flex items-center justify-center gap-3"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.4 }}
-                    >
-                        <History className="w-6 h-6" />
-                        Interactive Computer Components Presentations
-                    </motion.p>
-                </motion.header>
+                            <History className="w-6 h-6" />
+                            Next-Gen Computer Components Repository
+                        </motion.p>
 
+                        <motion.div
+                            className="flex flex-wrap justify-center lg:justify-start gap-4"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.6 }}
+                        >
+                            <div className="glass px-6 py-3 rounded-2xl flex items-center gap-2 border-cyan-500/30">
+                                <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                                <span className="text-white font-bold uppercase text-xs tracking-widest">System Online</span>
+                            </div>
+                            <div className="glass px-6 py-3 rounded-2xl flex items-center gap-2 border-red-500/30">
+                                <div className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />
+                                <span className="text-white font-bold uppercase text-xs tracking-widest">Persistence Active</span>
+                            </div>
+                        </motion.div>
+                    </div>
+
+                    {/* Sketchfab 3D Model Integration */}
+                    <motion.div
+                        className="w-full lg:w-[500px] h-[400px] glass rounded-[3rem] overflow-hidden neon-border relative group"
+                        initial={{ opacity: 0, x: 100 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.5, type: "spring" }}
+                    >
+                        <div className="absolute inset-0 z-0 bg-blue-900/20 blur-3xl group-hover:bg-cyan-900/30 transition-colors" />
+                        <iframe
+                            title="Motherboard/ Mainboard/ MOBO"
+                            className="w-full h-full relative z-10"
+                            frameBorder="0"
+                            allowFullScreen={true}
+                            scrolling="no"
+                            allow="autoplay; fullscreen; xr-spatial-tracking"
+                            src="https://sketchfab.com/models/4e0834261b66497e936a30476fb2f660/embed?dnt=1&autostart=1&camera=0&preload=1&transparent=1"
+                        />
+                        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 glass px-4 py-1 rounded-full text-[10px] text-white/50 font-bold z-20 pointer-events-none">
+                            INTERACTIVE 3D ENGINE
+                        </div>
+                    </motion.div>
+                </div>
+            </motion.header>
+
+            <div className="relative z-10 p-8 min-h-screen">
                 {/* Loading State */}
                 <AnimatePresence>
                     {loading && (
@@ -251,8 +281,23 @@ export default function PresentationDashboard() {
                                 key={pres.id}
                                 variants={cardVariants}
                                 whileHover="hover"
-                                className="glass glass-hover neon-border rounded-3xl p-8 card-3d cursor-pointer"
+                                className={`glass glass-hover neon-border rounded-[2.5rem] p-8 card-3d cursor-pointer flex flex-col ${index % 2 === 0 ? 'lg:translate-y-4' : 'lg:-translate-y-4'
+                                    }`}
                             >
+                                {/* Thumbnail Preview Area */}
+                                <div className="w-full h-40 glass rounded-2xl mb-6 relative overflow-hidden group/thumb">
+                                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-red-500/20 group-hover/thumb:opacity-0 transition-opacity" />
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                        {index === 0 ? (
+                                            <Layout className="w-12 h-12 text-white/30 group-hover/thumb:text-cyan-400 group-hover/thumb:scale-125 transition-all duration-500" />
+                                        ) : (
+                                            <MonitorIcon className="w-12 h-12 text-white/30 group-hover/thumb:text-red-400 group-hover/thumb:scale-125 transition-all duration-500" />
+                                        )}
+                                    </div>
+                                    <div className="absolute bottom-3 left-3 glass px-3 py-1 rounded-lg text-[10px] font-black text-white/70 uppercase tracking-tighter">
+                                        v{index + 1}.0 Stable
+                                    </div>
+                                </div>
                                 {/* Decorative particle effect on card */}
                                 <motion.div
                                     className="absolute top-4 right-4 w-3 h-3 rounded-full bg-cyan-400"
@@ -328,9 +373,42 @@ export default function PresentationDashboard() {
                     </motion.div>
                 )}
 
+                {/* Floating Quick Access Dock */}
+                <motion.div
+                    className="floating-nav flex items-center gap-6"
+                    initial={{ y: 100, x: '-50%', opacity: 0 }}
+                    animate={{ y: 0, x: '-50%', opacity: 1 }}
+                    transition={{ delay: 1, type: "spring", stiffness: 100 }}
+                >
+                    <motion.button
+                        whileHover={{ scale: 1.2, color: '#22d3ee' }}
+                        className="text-white/60 p-2"
+                        title="Dashboard"
+                    >
+                        <History className="w-6 h-6" />
+                    </motion.button>
+                    <div className="w-px h-6 bg-white/20" />
+                    <motion.button
+                        whileHover={{ scale: 1.2, color: '#ec4899' }}
+                        className="text-white/60 p-2"
+                        title="All Presentations"
+                    >
+                        <Presentation className="w-6 h-6" />
+                    </motion.button>
+                    <div className="w-px h-6 bg-white/20" />
+                    <motion.button
+                        whileHover={{ scale: 1.2, color: '#a855f7' }}
+                        className="text-white/60 p-2"
+                        title="System Settings"
+                        onClick={() => alert('Nexus Configuration Access Granted')}
+                    >
+                        <Settings className="w-6 h-6" />
+                    </motion.button>
+                </motion.div>
+
                 {/* Footer */}
                 <motion.footer
-                    className="text-center mt-20 text-white/70"
+                    className="text-center mt-20 mb-32 text-white/70 shadow-glow"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1 }}

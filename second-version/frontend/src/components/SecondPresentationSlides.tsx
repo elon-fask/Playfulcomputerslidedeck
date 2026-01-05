@@ -1,471 +1,423 @@
-import { Cpu, HardDrive, MemoryStick, Zap, Fan, Cable, Usb, Monitor as MonitorIcon } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Cpu, HardDrive, MemoryStick, Zap, Fan, Usb, Speaker, Globe, Video, Database, CircuitBoard } from 'lucide-react';
 
-interface SlideProps {
-    onNext?: () => void;
-    onPrev?: () => void;
-}
+const slideVariants = {
+    hidden: { opacity: 0, scale: 0.95 },
+    visible: {
+        opacity: 1,
+        scale: 1,
+        transition: { staggerChildren: 0.1 }
+    }
+};
+
+const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+};
 
 export function TitleSlide() {
     return (
-        <div className="glass rounded-3xl p-12 text-center fade-in-up min-h-[600px] flex flex-col justify-center">
-            <div className="flex justify-center mb-6">
-                <Cpu className="w-24 h-24 text-white" />
-            </div>
-            <h1 className="text-6xl font-bold text-white mb-6">
-                Computer Components & Connectors
-            </h1>
-            <p className="text-2xl text-white/90 mb-8">
-                A comprehensive guide to internal and external computer hardware
-            </p>
-            <div className="text-white/70 text-lg">
-                <p>OFPPT - Technical Presentation</p>
-                <p className="mt-2">{new Date().getFullYear()}</p>
-            </div>
-        </div>
+        <motion.div
+            variants={slideVariants}
+            initial="hidden"
+            animate="visible"
+            className="glass rounded-[3rem] p-16 text-center neon-border flex flex-col justify-center min-h-[600px] relative overflow-hidden"
+        >
+            <motion.div
+                animate={{
+                    rotateY: [0, 360],
+                    scale: [1, 1.1, 1]
+                }}
+                transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                className="flex justify-center mb-10"
+            >
+                <div className="p-8 glass rounded-full shadow-[0_0_50px_rgba(34,211,238,0.3)]">
+                    <Cpu className="w-28 h-28 text-cyan-400" />
+                </div>
+            </motion.div>
+            <motion.h1
+                variants={itemVariants}
+                className="text-7xl font-black text-white mb-8 tracking-tight drop-shadow-2xl"
+            >
+                Computer <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-red-400">Hardware</span> Ecosystem
+            </motion.h1>
+            <motion.p variants={itemVariants} className="text-3xl text-white/80 font-light mb-12 tracking-wide uppercase">
+                Advanced Components & Architecture
+            </motion.p>
+            <motion.div variants={itemVariants} className="flex justify-center gap-4 text-white/50 text-sm font-bold tracking-[0.2em] uppercase">
+                <span>OFPPT</span>
+                <span className="text-cyan-500">•</span>
+                <span>2025 Edition</span>
+            </motion.div>
+        </motion.div>
     );
 }
 
 export function ExpansionCardsSlide() {
     const cards = [
-        { name: 'Carte Son', icon: '🔊', desc: 'Sound Card for audio processing' },
-        { name: 'Carte Réseau', icon: '🌐', desc: 'Ethernet/Wi-Fi Network Card' },
-        { name: 'Carte Capture Vidéo', icon: '📹', desc: 'Video Capture Card' },
-        { name: 'Carte Contrôleur RAID', icon: '💾', desc: 'RAID Controller Card' },
-        { name: 'Carte USB Additionnelle', icon: '🔌', desc: 'Additional USB Card' }
+        { name: 'Carte Son', icon: <Speaker className="w-10 h-10" />, color: 'cyan' },
+        { name: 'Carte Réseau', icon: <Globe className="w-10 h-10" />, color: 'blue' },
+        { name: 'Capture Vidéo', icon: <Video className="w-10 h-10" />, color: 'purple' },
+        { name: 'Ctrl RAID', icon: <Database className="w-10 h-10" />, color: 'pink' },
+        { name: 'USB Extra', icon: <Usb className="w-10 h-10" />, color: 'red' }
     ];
 
     return (
-        <div className="glass rounded-3xl p-12 fade-in-up min-h-[600px]">
-            <h2 className="text-5xl font-bold text-white mb-8 text-center">
-                🎴 Cartes d'Extension
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div variants={slideVariants} initial="hidden" animate="visible" className="glass rounded-[3rem] p-12 min-h-[600px]">
+            <motion.h2 variants={itemVariants} className="text-5xl font-black text-white mb-12 text-center flex items-center justify-center gap-4">
+                <CircuitBoard className="w-12 h-12 text-cyan-400" />
+                Expansion Interface
+            </motion.h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {cards.map((card, idx) => (
-                    <div
+                    <motion.div
                         key={idx}
-                        className="glass glass-hover rounded-xl p-6 text-center"
-                        style={{ animationDelay: `${idx * 0.1}s` }}
+                        variants={itemVariants}
+                        whileHover={{ scale: 1.05, rotateX: -5, rotateY: 5 }}
+                        className="glass glass-hover rounded-3xl p-8 text-center border-t border-white/20"
                     >
-                        <div className="text-5xl mb-4">{card.icon}</div>
-                        <h3 className="text-xl font-bold text-white mb-2">{card.name}</h3>
-                        <p className="text-white/70 text-sm">{card.desc}</p>
-                    </div>
+                        <div className={`text-${card.color}-400 mb-6 flex justify-center`}>{card.icon}</div>
+                        <h3 className="text-2xl font-bold text-white mb-3">{card.name}</h3>
+                        <div className="h-1 w-12 bg-white/20 mx-auto rounded-full" />
+                    </motion.div>
                 ))}
             </div>
-        </div>
+        </motion.div>
     );
 }
 
 export function CPUSlide() {
     return (
-        <div className="glass rounded-3xl p-12 fade-in-up min-h-[600px]">
-            <div className="flex items-center gap-4 mb-8">
-                <Cpu className="w-16 h-16 text-white" />
-                <h2 className="text-5xl font-bold text-white">CPU (Processeur)</h2>
+        <motion.div variants={slideVariants} initial="hidden" animate="visible" className="glass rounded-[3rem] p-12 min-h-[600px]">
+            <div className="flex items-center gap-6 mb-12">
+                <div className="p-4 glass rounded-2xl">
+                    <Cpu className="w-16 h-16 text-cyan-400" />
+                </div>
+                <h2 className="text-5xl font-black text-white tracking-tight">CPU Architecture</h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="glass rounded-xl p-6">
-                    <h3 className="text-2xl font-bold text-white mb-4">Architecture</h3>
-                    <ul className="text-white/80 space-y-2">
-                        <li>• x86 / x86-64</li>
-                        <li>• ARM</li>
-                        <li>• Cores & Threads</li>
-                        <li>• Cache Levels (L1, L2, L3)</li>
-                    </ul>
-                </div>
-                <div className="glass rounded-xl p-6">
-                    <h3 className="text-2xl font-bold text-white mb-4">Modèles</h3>
-                    <ul className="text-white/80 space-y-2">
-                        <li>• Intel Core i3/i5/i7/i9</li>
-                        <li>• AMD Ryzen 3/5/7/9</li>
-                        <li>• Intel Xeon</li>
-                        <li>• AMD Threadripper</li>
-                    </ul>
-                </div>
-                <div className="glass rounded-xl p-6">
-                    <h3 className="text-2xl font-bold text-white mb-4">Socket</h3>
-                    <ul className="text-white/80 space-y-2">
-                        <li>• LGA 1700 (Intel)</li>
-                        <li>• AM5 (AMD)</li>
-                        <li>• LGA 1200 (Intel)</li>
-                        <li>• AM4 (AMD)</li>
-                    </ul>
-                </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {[
+                    { title: 'Core Logic', items: ['x86 / ARM', '64-bit Pipelines', 'Hyperthreading', 'L1/L2/L3 Cache'] },
+                    { title: 'Market Leaders', items: ['Intel Core (i3-i9)', 'AMD Ryzen (3-9)', 'Apple Silicon (M-series)', 'Workstation Tier'] },
+                    { title: 'Standard Sockets', items: ['LGA 1700 (Intel)', 'AM5 (AMD Next-Gen)', 'Zero Insertion Force', 'PGA Legacy'] }
+                ].map((block, i) => (
+                    <motion.div key={i} variants={itemVariants} className="glass rounded-3xl p-8 border-l-4 border-cyan-500/50">
+                        <h3 className="text-2xl font-bold text-cyan-400 mb-6 uppercase tracking-widest">{block.title}</h3>
+                        <ul className="space-y-4">
+                            {block.items.map((item, j) => (
+                                <li key={j} className="text-white/80 text-lg flex items-center gap-3">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-cyan-500 shadow-[0_0_8px_cyan]" />
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
+                    </motion.div>
+                ))}
             </div>
-        </div>
+        </motion.div>
     );
 }
 
 export function RAMSlide() {
     return (
-        <div className="glass rounded-3xl p-12 fade-in-up min-h-[600px]">
-            <div className="flex items-center gap-4 mb-8">
-                <MemoryStick className="w-16 h-16 text-white" />
-                <h2 className="text-5xl font-bold text-white">RAM (Mémoire)</h2>
+        <motion.div variants={slideVariants} initial="hidden" animate="visible" className="glass rounded-[3rem] p-12 min-h-[600px]">
+            <div className="flex items-center gap-6 mb-12">
+                <div className="p-4 glass rounded-2xl">
+                    <MemoryStick className="w-16 h-16 text-purple-400" />
+                </div>
+                <h2 className="text-5xl font-black text-white tracking-tight">Memory Density</h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="glass rounded-xl p-6">
-                    <h3 className="text-2xl font-bold text-white mb-4">Types</h3>
-                    <ul className="text-white/80 space-y-2 text-lg">
-                        <li>• DDR3 (Legacy)</li>
-                        <li>• DDR4 (Current)</li>
-                        <li>• DDR5 (Modern)</li>
-                        <li>• SO-DIMM (Laptops)</li>
-                    </ul>
-                </div>
-                <div className="glass rounded-xl p-6">
-                    <h3 className="text-2xl font-bold text-white mb-4">Capacité</h3>
-                    <ul className="text-white/80 space-y-2 text-lg">
-                        <li>• 4 GB - Basic</li>
-                        <li>• 8 GB - Standard</li>
-                        <li>• 16 GB - Gaming</li>
-                        <li>• 32 GB+ - Professional</li>
-                    </ul>
-                </div>
-                <div className="glass rounded-xl p-6">
-                    <h3 className="text-2xl font-bold text-white mb-4">Fréquence</h3>
-                    <ul className="text-white/80 space-y-2 text-lg">
-                        <li>• 2133-2666 MHz (DDR4)</li>
-                        <li>• 3200-3600 MHz (DDR4)</li>
-                        <li>• 4800-6000 MHz (DDR5)</li>
-                        <li>• CL (CAS Latency)</li>
-                    </ul>
-                </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {[
+                    { title: 'Evolution', items: ['DDR3 (Vintage)', 'DDR4 (Mainstream)', 'DDR5 (State-of-art)', 'ECC Memory'] },
+                    { title: 'Thresholds', items: ['8GB - Minimal', '16GB - Enthusiast', '32GB - Creator', '128GB - Enterprise'] },
+                    { title: 'Frequency', items: ['3200MHz (Sweet spot)', '6000MHz+ (OC)', 'JEDEC Standards', 'XMP Profiles'] }
+                ].map((block, i) => (
+                    <motion.div key={i} variants={itemVariants} className="glass rounded-3xl p-8 border-l-4 border-purple-500/50">
+                        <h3 className="text-2xl font-bold text-purple-400 mb-6 uppercase tracking-widest">{block.title}</h3>
+                        <ul className="space-y-4">
+                            {block.items.map((item, j) => (
+                                <li key={j} className="text-white/80 text-lg flex items-center gap-3">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-purple-500 shadow-[0_0_8px_purple]" />
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
+                    </motion.div>
+                ))}
             </div>
-        </div>
+        </motion.div>
     );
 }
 
 export function MotherboardSlide() {
     return (
-        <div className="glass rounded-3xl p-12 fade-in-up min-h-[600px]">
-            <h2 className="text-5xl font-bold text-white mb-8 text-center">🔧 Carte Mère</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="glass rounded-xl p-6">
-                    <h3 className="text-2xl font-bold text-white mb-4">Chipset</h3>
-                    <ul className="text-white/80 space-y-2">
-                        <li>• Intel Z790, B760</li>
-                        <li>• AMD X670, B650</li>
-                        <li>• Controls I/O</li>
-                        <li>• PCIe lanes</li>
-                    </ul>
+        <motion.div variants={slideVariants} initial="hidden" animate="visible" className="glass rounded-[3rem] p-12 min-h-[600px] overflow-hidden">
+            <div className="flex flex-col lg:flex-row gap-12 items-center">
+                <div className="flex-1">
+                    <h2 className="text-5xl font-black text-white mb-8">System Integration Hub</h2>
+                    <div className="grid grid-cols-1 gap-6">
+                        {[
+                            { title: 'Logic Control', items: ['Chipset (Z/B/X)', 'VRM Cooling', 'BIOS/UEFI'] },
+                            { title: 'Form Factors', items: ['Standard ATX', 'Micro-ATX', 'Mini-ITX'] },
+                            { title: 'Physical Interface', items: ['Socket Pinout', 'I/O Shielding', 'PCIe Routing'] }
+                        ].map((block, i) => (
+                            <motion.div key={i} variants={itemVariants} className="glass rounded-2xl p-6 shadow-2xl bg-gradient-to-b from-white/10 to-transparent">
+                                <h3 className="text-xl font-bold text-cyan-400 mb-4 flex items-center gap-3">
+                                    <div className="w-1.5 h-6 bg-cyan-400 rounded-full" />
+                                    {block.title}
+                                </h3>
+                                <div className="flex flex-wrap gap-3">
+                                    {block.items.map((item, j) => (
+                                        <span key={j} className="text-white/70 text-sm font-medium border border-white/10 px-3 py-1 rounded-lg bg-white/5">
+                                            {item}
+                                        </span>
+                                    ))}
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
-                <div className="glass rounded-xl p-6">
-                    <h3 className="text-2xl font-bold text-white mb-4">Format</h3>
-                    <ul className="text-white/80 space-y-2">
-                        <li>• ATX (305 × 244 mm)</li>
-                        <li>• Micro-ATX (244 × 244 mm)</li>
-                        <li>• Mini-ITX (170 × 170 mm)</li>
-                        <li>• E-ATX (Extended)</li>
-                    </ul>
-                </div>
-                <div className="glass rounded-xl p-6">
-                    <h3 className="text-2xl font-bold text-white mb-4">Socket</h3>
-                    <ul className="text-white/80 space-y-2">
-                        <li>• CPU compatibility</li>
-                        <li>• LGA vs PGA</li>
-                        <li>• Gen support</li>
-                        <li>• Upgrade path</li>
-                    </ul>
-                </div>
+
+                <motion.div
+                    className="w-full lg:w-1/2 h-[500px] glass rounded-[2.5rem] overflow-hidden neon-border relative shadow-2xl"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.5 }}
+                >
+                    <iframe
+                        title="Motherboard Interactive View"
+                        className="w-full h-full relative z-10"
+                        frameBorder="0"
+                        allowFullScreen={true}
+                        allow="autoplay; fullscreen; xr-spatial-tracking"
+                        src="https://sketchfab.com/models/4e0834261b66497e936a30476fb2f660/embed?dnt=1&autostart=1&transparent=1"
+                    />
+                </motion.div>
             </div>
-        </div>
+        </motion.div>
     );
 }
 
 export function StorageSlide() {
     return (
-        <div className="glass rounded-3xl p-12 fade-in-up min-h-[600px]">
-            <div className="flex items-center gap-4 mb-8">
-                <HardDrive className="w-16 h-16 text-white" />
-                <h2 className="text-5xl font-bold text-white">Disque Dur</h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="glass rounded-xl p-8">
-                    <h3 className="text-3xl font-bold text-white mb-4">HDD</h3>
-                    <ul className="text-white/80 space-y-3 text-lg">
-                        <li>✓ Mechanical drive</li>
-                        <li>✓ 500 GB - 20 TB</li>
-                        <li>✓ 5400-7200 RPM</li>
-                        <li>✓ Lower cost/GB</li>
-                        <li>✗ Slower (80-160 MB/s)</li>
-                        <li>✗ Moving parts</li>
-                    </ul>
+        <motion.div variants={slideVariants} initial="hidden" animate="visible" className="glass rounded-[3rem] p-12 min-h-[600px]">
+            <div className="flex items-center gap-6 mb-12">
+                <div className="p-4 glass rounded-2xl">
+                    <HardDrive className="w-16 h-16 text-blue-400" />
                 </div>
-                <div className="glass rounded-xl p-8">
-                    <h3 className="text-3xl font-bold text-white mb-4">SSD</h3>
-                    <ul className="text-white/80 space-y-3 text-lg">
-                        <li>✓ Solid-state (No moving parts)</li>
-                        <li>✓ 120 GB - 8 TB</li>
-                        <li>✓ SATA: ~550 MB/s</li>
-                        <li>✓ NVMe: 3000-7000 MB/s</li>
-                        <li>✓ M.2 form factor</li>
-                        <li>✓ Lower latency</li>
-                    </ul>
-                </div>
+                <h2 className="text-5xl font-black text-white tracking-tight">Non-Volatile Storage</h2>
             </div>
-        </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <motion.div variants={itemVariants} className="glass rounded-[2rem] p-10 border-t border-white/20 bg-blue-900/10">
+                    <h3 className="text-4xl font-black text-white mb-8 border-b border-white/10 pb-4">Hard Disk (HDD)</h3>
+                    <div className="space-y-4 text-xl text-white/80">
+                        <p className="flex justify-between"><span>Throughput</span> <span className="text-blue-400 font-bold">160 MB/s</span></p>
+                        <p className="flex justify-between"><span>Mechanism</span> <span className="opacity-60">Platter Spin</span></p>
+                        <p className="flex justify-between"><span>Reliability</span> <span className="opacity-60">Moving Parts</span></p>
+                        <div className="mt-8 p-4 glass rounded-xl text-sm italic opacity-60">Ideal for massive archival (20TB+)</div>
+                    </div>
+                </motion.div>
+
+                <motion.div variants={itemVariants} className="glass rounded-[2rem] p-10 border-t border-cyan-400/30 bg-cyan-900/10 shadow-[0_0_50px_rgba(34,211,238,0.1)]">
+                    <h3 className="text-4xl font-black text-white mb-8 border-b border-cyan-400/20 pb-4">Solid State (SSD)</h3>
+                    <div className="space-y-4 text-xl text-white/80">
+                        <p className="flex justify-between"><span>SATA Interface</span> <span className="text-cyan-400 font-bold">550 MB/s</span></p>
+                        <p className="flex justify-between"><span>NVMe Gen 4/5</span> <span className="text-cyan-400 font-bold">7-12 GB/s</span></p>
+                        <p className="flex justify-between"><span>Latency</span> <span className="text-cyan-400 font-bold">Near Zero</span></p>
+                        <div className="mt-8 p-4 glass rounded-xl text-sm font-bold text-cyan-400 bg-cyan-400/10">Flash NAND Technology</div>
+                    </div>
+                </motion.div>
+            </div>
+        </motion.div>
     );
 }
 
 export function GPUSlide() {
     return (
-        <div className="glass rounded-3xl p-12 fade-in-up min-h-[600px]">
-            <h2 className="text-5xl font-bold text-white mb-8 text-center">🎮 Carte Graphique</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="glass rounded-xl p-6">
-                    <h3 className="text-2xl font-bold text-white mb-4">GPU</h3>
-                    <ul className="text-white/80 space-y-2">
-                        <li>• NVIDIA GeForce RTX</li>
-                        <li>• AMD Radeon RX</li>
-                        <li>• CUDA Cores / Stream Processors</li>
-                        <li>• Ray Tracing</li>
-                    </ul>
-                </div>
-                <div className="glass rounded-xl p-6">
-                    <h3 className="text-2xl font-bold text-white mb-4">VRAM</h3>
-                    <ul className="text-white/80 space-y-2">
-                        <li>• GDDR6 / GDDR6X</li>
-                        <li>• 4 GB - Entry Level</li>
-                        <li>• 8-12 GB - Gaming</li>
-                        <li>• 16-24 GB - Professional</li>
-                    </ul>
-                </div>
-                <div className="glass rounded-xl p-6">
-                    <h3 className="text-2xl font-bold text-white mb-4">Modèles</h3>
-                    <ul className="text-white/80 space-y-2">
-                        <li>• RTX 4090, 4080, 4070</li>
-                        <li>• RX 7900 XTX, 7800 XT</li>
-                        <li>• Professional: Quadro, Radeon Pro</li>
-                        <li>• TDP: 150-450W</li>
-                    </ul>
-                </div>
+        <motion.div variants={slideVariants} initial="hidden" animate="visible" className="glass rounded-[3rem] p-12 min-h-[600px]">
+            <h2 className="text-5xl font-black text-white mb-16 text-center">Visual Compute & Render</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {[
+                    { title: 'Core Specs', items: ['Tensor Cores', 'RT Cores (Ray Tracing)', 'Compute Units', 'TDP (Watts)'] },
+                    { title: 'Memory Pipe', items: ['GDDR6X Capacity', 'Memory Bandwidth', 'Memory Bus (bit)', 'Bandwidth Speed'] },
+                    { title: 'Series', items: ['NVIDIA RTX 40-Series', 'AMD Radeon RX 7000', 'Workstation Quadro', 'Arc Graphics'] }
+                ].map((block, i) => (
+                    <motion.div key={i} variants={itemVariants} className="glass rounded-3xl p-8 relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-bl-full transition-all group-hover:scale-150" />
+                        <h3 className="text-2xl font-bold text-white mb-6 relative z-10">{block.title}</h3>
+                        <ul className="space-y-3 relative z-10">
+                            {block.items.map((item, j) => (
+                                <li key={j} className="text-white/60 hover:text-white transition-colors flex items-center gap-2">
+                                    <div className="w-1 h-1 rounded-full bg-white/30" />
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
+                    </motion.div>
+                ))}
             </div>
-        </div>
+        </motion.div>
     );
 }
 
 export function PowerSupplySlide() {
     return (
-        <div className="glass rounded-3xl p-12 fade-in-up min-h-[600px]">
-            <div className="flex items-center gap-4 mb-8">
-                <Zap className="w-16 h-16 text-white" />
-                <h2 className="text-5xl font-bold text-white">Alimentation (PSU)</h2>
+        <motion.div variants={slideVariants} initial="hidden" animate="visible" className="glass rounded-[3rem] p-12 min-h-[600px]">
+            <div className="flex items-center gap-6 mb-12">
+                <div className="p-4 glass rounded-2xl">
+                    <Zap className="w-16 h-16 text-yellow-400" />
+                </div>
+                <h2 className="text-5xl font-black text-white tracking-tight">Power Delivery</h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="glass rounded-xl p-6">
-                    <h3 className="text-2xl font-bold text-white mb-4">Puissance</h3>
-                    <ul className="text-white/80 space-y-2">
-                        <li>• 450-550W: Basic</li>
-                        <li>• 650-750W: Gaming</li>
-                        <li>• 850W+: High-end</li>
-                        <li>• Modular cables</li>
-                    </ul>
-                </div>
-                <div className="glass rounded-xl p-6">
-                    <h3 className="text-2xl font-bold text-white mb-4">Certification</h3>
-                    <ul className="text-white/80 space-y-2">
-                        <li>• 80+ Bronze (82-85%)</li>
-                        <li>• 80+ Gold (87-90%)</li>
-                        <li>• 80+ Platinum (90-92%)</li>
-                        <li>• 80+ Titanium (92-94%)</li>
-                    </ul>
-                </div>
-                <div className="glass rounded-xl p-6">
-                    <h3 className="text-2xl font-bold text-white mb-4">Connecteurs</h3>
-                    <ul className="text-white/80 space-y-2">
-                        <li>• 24-pin ATX (Motherboard)</li>
-                        <li>• 8-pin CPU (4+4)</li>
-                        <li>• 6/8-pin PCIe (GPU)</li>
-                        <li>• SATA / Molex</li>
-                    </ul>
-                </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                {[
+                    { label: 'Rating', value: '450W - 1600W+', desc: 'Calculated by Component Load' },
+                    { label: 'Efficiency', value: '80+ Titanium', desc: '94% Efficiency Target' },
+                    { label: 'Module', value: 'Fully Modular', desc: 'Optimal Cable Management' }
+                ].map((box, i) => (
+                    <motion.div key={i} variants={itemVariants} className="glass rounded-3xl p-8 border-b-4 border-yellow-500/30 shadow-xl">
+                        <div className="text-yellow-400 uppercase tracking-widest text-sm mb-4 font-black">{box.label}</div>
+                        <div className="text-4xl font-black text-white mb-4">{box.value}</div>
+                        <div className="text-white/40 text-sm">{box.desc}</div>
+                    </motion.div>
+                ))}
             </div>
-        </div>
+        </motion.div>
     );
 }
 
 export function CoolingSlide() {
     return (
-        <div className="glass rounded-3xl p-12 fade-in-up min-h-[600px]">
-            <div className="flex items-center gap-4 mb-8">
-                <Fan className="w-16 h-16 text-white" />
-                <h2 className="text-5xl font-bold text-white">Refroidissement</h2>
+        <motion.div variants={slideVariants} initial="hidden" animate="visible" className="glass rounded-[3rem] p-12 min-h-[600px]">
+            <div className="flex items-center gap-6 mb-12">
+                <div className="p-4 glass rounded-2xl">
+                    <Fan className="w-16 h-16 text-cyan-300" />
+                </div>
+                <h2 className="text-5xl font-black text-white tracking-tight">Thermal Dynamics</h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="glass rounded-xl p-6">
-                    <h3 className="text-2xl font-bold text-white mb-4">Ventilateurs</h3>
-                    <ul className="text-white/80 space-y-2">
-                        <li>• Case fans (120mm, 140mm)</li>
-                        <li>• CPU cooler fan</li>
-                        <li>• GPU fans</li>
-                        <li>• PWM control</li>
-                    </ul>
-                </div>
-                <div className="glass rounded-xl p-6">
-                    <h3 className="text-2xl font-bold text-white mb-4">Radiateurs</h3>
-                    <ul className="text-white/80 space-y-2">
-                        <li>• Heatsinks (passive)</li>
-                        <li>• Tower coolers</li>
-                        <li>• Aluminum / Copper</li>
-                        <li>• Heat pipes</li>
-                    </ul>
-                </div>
-                <div className="glass rounded-xl p-6">
-                    <h3 className="text-2xl font-bold text-white mb-4">Watercooling</h3>
-                    <ul className="text-white/80 space-y-2">
-                        <li>• AIO (All-in-One)</li>
-                        <li>• Custom loops</li>
-                        <li>• Radiator sizes</li>
-                        <li>• Better cooling</li>
-                    </ul>
-                </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {[
+                    { title: 'Air Cooling', items: ['TDP Capacity', 'RPM Control', 'Static Pressure', 'Heat Pipe Physics'] },
+                    { title: 'Liquid AIO', items: ['240mm/360mm Rads', 'Pump Flow Rate', 'Leak Prevention', 'Thermal Paste'] },
+                    { title: 'Custom Loop', items: ['Reservoir Design', 'Hard/Soft Tubing', 'Blocks & Fittings', 'Coolant Chemistry'] }
+                ].map((block, i) => (
+                    <motion.div key={i} variants={itemVariants} className="glass rounded-3xl p-8 bg-white/5 border border-white/10">
+                        <h3 className="text-2xl font-bold text-white mb-8 border-b border-white/10 pb-2">{block.title}</h3>
+                        <ul className="space-y-4">
+                            {block.items.map((item, j) => (
+                                <li key={j} className="text-white/70 flex items-center gap-2">
+                                    <div className="w-3 h-3 border border-white/20 rounded-sm" />
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
+                    </motion.div>
+                ))}
             </div>
-        </div>
+        </motion.div>
     );
 }
 
 export function InternalConnectorsSlide() {
     return (
-        <div className="glass rounded-3xl p-12 fade-in-up min-h-[600px]">
-            <div className="flex items-center gap-4 mb-8">
-                <Cable className="w-16 h-16 text-white" />
-                <h2 className="text-5xl font-bold text-white">Ports Internes</h2>
+        <motion.div variants={slideVariants} initial="hidden" animate="visible" className="glass rounded-[3rem] p-12 min-h-[600px]">
+            <h2 className="text-5xl font-black text-white mb-16 text-center">System Interconnects</h2>
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
+                {[
+                    { title: 'PCI Express', specs: ['Gen 5.0 Speed', 'x16 for GPU'] },
+                    { title: 'SATA Array', specs: ['Standard 6Gbps', 'Data/Power'] },
+                    { title: 'Power ATX', specs: ['24-pin Main', '8-pin CPU'] },
+                    { title: 'Headers', specs: ['USB 3.2 Gen 2', 'PWM Fan'] },
+                    { title: 'M.2 Slots', specs: ['Key M (NVMe)', 'Key B (SATA)'] }
+                ].map((icon, i) => (
+                    <motion.div key={i} variants={itemVariants} className="glass rounded-2xl p-6 border border-white/10 flex flex-col justify-center">
+                        <h3 className="text-xl font-black text-white mb-2">{icon.title}</h3>
+                        {icon.specs.map((s, idx) => (
+                            <p key={idx} className="text-cyan-400 text-xs font-bold uppercase tracking-widest">{s}</p>
+                        ))}
+                    </motion.div>
+                ))}
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                <div className="glass rounded-xl p-5">
-                    <h3 className="text-xl font-bold text-white mb-3">PCI Express</h3>
-                    <ul className="text-white/80 space-y-1 text-sm">
-                        <li>• x1, x4, x8, x16</li>
-                        <li>• Gen 3, 4, 5</li>
-                    </ul>
-                </div>
-                <div className="glass rounded-xl p-5">
-                    <h3 className="text-xl font-bold text-white mb-3">SATA</h3>
-                    <ul className="text-white/80 space-y-1 text-sm">
-                        <li>• Data connector</li>
-                        <li>• Power connector</li>
-                    </ul>
-                </div>
-                <div className="glass rounded-xl p-5">
-                    <h3 className="text-xl font-bold text-white mb-3">Power</h3>
-                    <ul className="text-white/80 space-y-1 text-sm">
-                        <li>• 24-pin ATX</li>
-                        <li>• 8-pin CPU</li>
-                        <li>• PCIe power</li>
-                    </ul>
-                </div>
-                <div className="glass rounded-xl p-5">
-                    <h3 className="text-xl font-bold text-white mb-3">Headers</h3>
-                    <ul className="text-white/80 space-y-1 text-sm">
-                        <li>• USB 2.0 / 3.0</li>
-                        <li>• Audio (HD Audio)</li>
-                        <li>• Fan headers</li>
-                    </ul>
-                </div>
-                <div className="glass rounded-xl p-5 md:col-span-2 lg:col-span-2">
-                    <h3 className="text-xl font-bold text-white mb-3">M.2 Slots</h3>
-                    <ul className="text-white/80 space-y-1 text-sm">
-                        <li>• M.2 2280 (SATA): 6 Gbps</li>
-                        <li>• M.2 NVMe (PCIe Gen 3): ~3500 MB/s</li>
-                        <li>• M.2 NVMe (PCIe Gen 4): ~7000 MB/s</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        </motion.div>
     );
 }
 
 export function ExternalPortsSlide() {
     return (
-        <div className="glass rounded-3xl p-12 fade-in-up min-h-[600px]">
-            <div className="flex items-center gap-4 mb-8">
-                <Usb className="w-16 h-16 text-white" />
-                <h2 className="text-5xl font-bold text-white">Ports Externes</h2>
+        <motion.div variants={slideVariants} initial="hidden" animate="visible" className="glass rounded-[3rem] p-12 min-h-[600px]">
+            <h2 className="text-5xl font-black text-white mb-16 text-center">Input / Output Perimeter</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {[
+                    { type: 'Universal Serial Bus', details: ['Type-C (Thunderbolt 4)', 'Type-A (USB 3.2)', 'Power Delivery (100W)'] },
+                    { type: 'Display Interface', details: ['DisplayPort 2.1 (8K)', 'HDMI 2.1 (4K/120Hz)', 'VGA/DVI (Legacy)'] },
+                    { type: 'Connectivity', details: ['2.5G/10G Ethernet', 'Wi-Fi 7 Antenna', 'PS/2 Peripheral'] },
+                    { type: 'Acoustics', details: ['3.5mm Analog', 'S/PDIF Optical', 'Balanced Output'] }
+                ].map((p, i) => (
+                    <motion.div key={i} variants={itemVariants} className="glass rounded-3xl p-8 bg-gradient-to-r from-white/5 to-transparent">
+                        <h3 className="text-2xl font-bold text-white mb-4 italic opacity-90">{p.type}</h3>
+                        <div className="flex flex-wrap gap-2">
+                            {p.details.map((d, j) => (
+                                <span key={j} className="px-3 py-1 bg-white/10 rounded-full text-xs font-bold text-white/50 border border-white/10">
+                                    {d}
+                                </span>
+                            ))}
+                        </div>
+                    </motion.div>
+                ))}
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="glass rounded-xl p-6">
-                    <h3 className="text-2xl font-bold text-white mb-4">USB</h3>
-                    <ul className="text-white/80 space-y-2">
-                        <li>• Type A, B, C</li>
-                        <li>• USB 2.0: 480 Mbps</li>
-                        <li>• USB 3.0/3.1: 5-10 Gbps</li>
-                        <li>• USB 3.2/4: 20-40 Gbps</li>
-                    </ul>
-                </div>
-                <div className="glass rounded-xl p-6">
-                    <h3 className="text-2xl font-bold text-white mb-4">Vidéo</h3>
-                    <ul className="text-white/80 space-y-2">
-                        <li>• HDMI: 4K@60Hz, 8K@60Hz</li>
-                        <li>• DisplayPort: 4K@144Hz</li>
-                        <li>• VGA: Legacy analog</li>
-                        <li>• DVI: Digital/Analog</li>
-                    </ul>
-                </div>
-                <div className="glass rounded-xl p-6">
-                    <h3 className="text-2xl font-bold text-white mb-4">Audio & Réseau</h3>
-                    <ul className="text-white/80 space-y-2">
-                        <li>• Jack 3.5mm (Mic, Line, Headphones)</li>
-                        <li>• SPDIF (Optical/Coaxial)</li>
-                        <li>• RJ45 Ethernet (1 Gbps, 2.5 Gbps)</li>
-                    </ul>
-                </div>
-                <div className="glass rounded-xl p-6">
-                    <h3 className="text-2xl font-bold text-white mb-4">Autres</h3>
-                    <ul className="text-white/80 space-y-2">
-                        <li>• Thunderbolt 3/4 (40 Gbps)</li>
-                        <li>• eSATA (External SATA)</li>
-                        <li>• PS/2 (Keyboard/Mouse - Legacy)</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        </motion.div>
     );
 }
 
 export function ConclusionSlide() {
     return (
-        <div className="glass rounded-3xl p-12 text-center fade-in-up min-h-[600px] flex flex-col justify-center">
-            <h2 className="text-6xl font-bold text-white mb-8">Conclusion</h2>
-            <div className="max-w-3xl mx-auto">
-                <p className="text-2xl text-white/90 mb-8 leading-relaxed">
-                    Understanding computer components and connectors is essential for building,
-                    upgrading, and troubleshooting modern computers.
-                </p>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                    <div className="glass rounded-xl p-4">
-                        <Cpu className="w-12 h-12 text-white mx-auto mb-2" />
-                        <p className="text-white text-sm">CPU</p>
-                    </div>
-                    <div className="glass rounded-xl p-4">
-                        <MemoryStick className="w-12 h-12 text-white mx-auto mb-2" />
-                        <p className="text-white text-sm">RAM</p>
-                    </div>
-                    <div className="glass rounded-xl p-4">
-                        <HardDrive className="w-12 h-12 text-white mx-auto mb-2" />
-                        <p className="text-white text-sm">Storage</p>
-                    </div>
-                    <div className="glass rounded-xl p-4">
-                        <MonitorIcon className="w-12 h-12 text-white mx-auto mb-2" />
-                        <p className="text-white text-sm">Display</p>
-                    </div>
-                </div>
-                <p className="text-xl text-white/80">
-                    Merci pour votre attention! 🎓
-                </p>
+        <motion.div
+            variants={slideVariants}
+            initial="hidden"
+            animate="visible"
+            className="glass rounded-[3rem] p-16 text-center flex flex-col justify-center min-h-[600px]"
+        >
+            <motion.div
+                animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 3, repeat: Infinity }}
+                className="text-8xl mb-8"
+            >
+                🏁
+            </motion.div>
+            <h2 className="text-7xl font-black text-white mb-10 tracking-tighter">Mission Accomplished</h2>
+            <p className="text-2xl text-white/60 max-w-2xl mx-auto leading-relaxed uppercase tracking-[0.3em] font-light">
+                Hardware <span className="text-cyan-400 font-black">Knowledge</span> Mastered
+            </p>
+            <div className="mt-16 flex justify-center gap-8 opacity-20">
+                <Cpu className="w-12 h-12 text-white" />
+                <Zap className="w-12 h-12 text-white" />
+                <HardDrive className="w-12 h-12 text-white" />
             </div>
-        </div>
+        </motion.div>
     );
 }
 
 export function QASlide() {
     return (
-        <div className="glass rounded-3xl p-12 text-center fade-in-up min-h-[600px] flex flex-col justify-center">
-            <div className="text-8xl mb-8">❓</div>
-            <h2 className="text-6xl font-bold text-white mb-8">Questions & Answers</h2>
-            <p className="text-3xl text-white/90">
-                Feel free to ask any questions!
-            </p>
-        </div>
+        <motion.div
+            variants={slideVariants}
+            initial="hidden"
+            animate="visible"
+            className="glass rounded-[3rem] p-16 text-center neon-border flex flex-col justify-center min-h-[600px]"
+        >
+            <motion.div
+                animate={{ y: [0, -20, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="text-9xl mb-12 drop-shadow-[0_0_30px_rgba(255,255,255,0.3)]"
+            >
+                🛰️
+            </motion.div>
+            <h2 className="text-6xl font-black text-white mb-6">Open Frequency</h2>
+            <p className="text-xl text-cyan-400 font-bold uppercase tracking-[0.5em]">Any Queries?</p>
+            <div className="mt-20 text-white/30 text-xs font-black uppercase tracking-widest">
+                End of Transmission
+            </div>
+        </motion.div>
     );
 }

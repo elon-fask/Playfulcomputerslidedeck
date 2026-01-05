@@ -21,7 +21,7 @@ export function GPUSlide() {
           <div className="space-y-4">
             <div className="relative rounded-2xl overflow-hidden shadow-xl">
               <img
-                src="https://images.unsplash.com/photo-1658673847785-08f1738116f8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxncmFwaGljcyUyMGNhcmQlMjBHUFV8ZW58MXx8fHwxNzY2MTM2Njc3fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                src="https://www.hellotech.com/blog/wp-content/uploads/2020/02/what-is-a-gpu.jpg"
                 alt="Graphics Card"
                 className="w-full h-64 object-cover"
               />
