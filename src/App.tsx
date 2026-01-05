@@ -8,8 +8,9 @@ import { ExternalPortsSlide } from './components/pro/ExternalPortsSlide';
 import { ComparisonSlide } from './components/pro/ComparisonSlide';
 import { PracticalTipsSlide } from './components/pro/PracticalTipsSlide';
 import { CaseStudySlide } from './components/pro/CaseStudySlide';
-import { QASlide } from './components/pro/QASlide';
+import { QuizGameSlide } from './components/pro/QuizGameSlide';
 import { ConclusionSlide } from './components/pro/ConclusionSlide';
+import { QASlide } from './components/pro/QASlide';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function App() {
@@ -25,6 +26,7 @@ export default function App() {
     <ComparisonSlide key="comparison" />,
     <PracticalTipsSlide key="tips" />,
     <CaseStudySlide key="case" />,
+    <QuizGameSlide key="quiz" />,
     <ConclusionSlide key="conclusion" />,
     <QASlide key="qa" />
   ];
