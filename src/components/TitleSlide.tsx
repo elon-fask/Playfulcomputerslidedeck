@@ -1,6 +1,5 @@
 import React from 'react';
 import { Monitor, Sparkles } from 'lucide-react';
-import openingPicture from '../assets/opening_picture.png';
 
 export function TitleSlide() {
   return (
@@ -14,14 +13,14 @@ export function TitleSlide() {
 
       {/* Main content */}
       <div className="relative z-10 text-center space-y-8">
-        {/* Opening Picture */}
+        {/* Computer Icon with smile */}
         <div className="relative inline-block">
-          <div className="rounded-3xl p-1 shadow-2xl transform hover:scale-105 transition-transform duration-500">
-            <img
-              src={openingPicture}
-              alt="Welcome to Computer Science"
-              className="w-full max-w-md h-auto rounded-2xl object-cover"
-            />
+          <div className="bg-gradient-to-br from-purple-500 to-blue-500 rounded-3xl p-8 shadow-lg transform hover:scale-105 transition-transform">
+            <Monitor className="w-32 h-32 text-white" />
+          </div>
+          {/* Smiley face overlay */}
+          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2">
+            <div className="text-6xl">😊</div>
           </div>
         </div>
 
@@ -34,7 +33,7 @@ export function TitleSlide() {
             </h1>
             <Sparkles className="w-8 h-8 text-yellow-500 animate-pulse" />
           </div>
-
+          
           <p className="text-3xl text-gray-600">
             A Fun Adventure Inside the Magic Box!
           </p>
