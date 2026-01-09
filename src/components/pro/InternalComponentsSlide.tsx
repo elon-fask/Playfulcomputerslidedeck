@@ -1,68 +1,112 @@
-import React, { useState } from 'react';
-import { Cpu, MemoryStick, CircuitBoard, HardDrive, Zap, Wind } from 'lucide-react';
+import React from 'react';
+import { Cpu, MemoryStick, CircuitBoard, HardDrive, Zap, Wind, Monitor } from 'lucide-react';
+import { VideoPlayer } from './VideoPlayer';
 
 export function InternalComponentsSlide() {
-  const [hoveredComponent, setHoveredComponent] = useState<string | null>(null);
-  
   const components = [
     {
       id: 'cpu',
       icon: Cpu,
-      name: 'CPU',
-      fullName: 'Central Processing Unit',
-      details: 'Architecture: x86 (Intel/AMD) vs. ARM',
-      specs: 'Socket: LGA (Intel), AM5 (AMD)',
-      importance: 'Determines compatibility and performance',
+      name: 'CPU (Central Processing Unit)',
+      description: 'The brain of the computer that executes instructions and processes data at incredible speeds.',
+      features: [
+        'Architecture: x86 (Intel/AMD) vs. ARM',
+        'Socket types: LGA (Intel), AM5 (AMD)',
+        'Core count: 4-64+ cores for different workloads',
+        'Clock speeds: 3.0GHz - 5.8GHz+'
+      ],
+      importance: 'Determines system compatibility and overall performance ceiling',
+      imagePlaceholder: 'cpu-image.jpg',
       color: 'from-blue-500 to-cyan-500'
     },
     {
       id: 'ram',
       icon: MemoryStick,
-      name: 'RAM',
-      fullName: 'Random Access Memory',
-      details: 'Types: DDR3 (old), DDR4 (common), DDR5 (cutting-edge)',
-      specs: 'Frequency: 2400MHz–6000MHz+',
-      importance: 'More RAM = better multitasking',
+      name: 'RAM (Random Access Memory)',
+      description: 'Temporary high-speed memory that stores data the CPU is actively using.',
+      features: [
+        'Types: DDR3 (legacy), DDR4 (common), DDR5 (latest)',
+        'Frequency: 2400MHz - 6000MHz+',
+        'Capacity: 8GB - 128GB+ for consumer systems',
+        'Dual/Quad channel configurations'
+      ],
+      importance: 'More RAM enables better multitasking and handles larger datasets',
+      imagePlaceholder: 'ram-image.jpg',
       color: 'from-purple-500 to-pink-500'
     },
     {
       id: 'motherboard',
       icon: CircuitBoard,
-      name: 'Carte Mère',
-      fullName: 'Motherboard',
-      details: 'Chipset: Intel Z790, AMD B550',
-      specs: 'Format: ATX, Micro-ATX, Mini-ITX',
-      importance: 'Dictates upgrade paths and compatibility',
+      name: 'Motherboard',
+      description: 'The main circuit board that connects all components and enables communication between them.',
+      features: [
+        'Chipset: Intel Z790, AMD B550, X670',
+        'Form factors: ATX, Micro-ATX, Mini-ITX',
+        'Expansion slots: PCIe, M.2, SATA',
+        'Built-in features: Audio, Network, USB'
+      ],
+      importance: 'Dictates upgrade paths, compatibility, and available features',
+      imagePlaceholder: 'motherboard-image.jpg',
       color: 'from-green-500 to-emerald-500'
     },
     {
       id: 'storage',
       icon: HardDrive,
-      name: 'Disque Dur',
-      fullName: 'Storage Drive',
-      details: 'HDD vs. SSD: SSDs are 10x faster',
-      specs: 'Interfaces: SATA (6Gb/s), NVMe (PCIe 4.0)',
-      importance: 'SSDs reduce boot times from minutes to seconds',
+      name: 'Storage Drive',
+      description: 'Permanently stores your operating system, applications, and files.',
+      features: [
+        'HDD: 1-20TB, mechanical, slower (100-200MB/s)',
+        'SATA SSD: 250GB-4TB, solid state (550MB/s)',
+        'NVMe SSD: 250GB-4TB, PCIe interface (7000MB/s)',
+        'Enterprise options: SAS, U.2, E1.S'
+      ],
+      importance: 'SSDs reduce boot times from minutes to seconds and improve responsiveness',
+      imagePlaceholder: 'storage-image.jpg',
       color: 'from-orange-500 to-red-500'
+    },
+    {
+      id: 'gpu',
+      icon: Monitor,
+      name: 'Graphics Card (GPU)',
+      description: 'Specialized processor for rendering graphics, video, and parallel computations.',
+      features: [
+        'Brands: NVIDIA (RTX 40 series), AMD (RX 7000)',
+        'VRAM: 6GB - 24GB for gaming/professional work',
+        'Ray tracing and AI acceleration',
+        'Multiple display outputs'
+      ],
+      importance: 'Critical for gaming, 3D rendering, video editing, and AI workloads',
+      imagePlaceholder: 'gpu-image.jpg',
+      color: 'from-pink-500 to-purple-500'
     },
     {
       id: 'psu',
       icon: Zap,
-      name: 'Alimentation',
-      fullName: 'Power Supply Unit',
-      details: 'Power: 500W–1000W',
-      specs: 'Certification: 80 Plus (Bronze/Gold/Platinum)',
-      importance: 'Poor PSUs can damage your entire system',
+      name: 'Power Supply Unit (PSU)',
+      description: 'Converts AC power from the wall to stable DC power for computer components.',
+      features: [
+        'Wattage: 500W - 1600W+ for various builds',
+        'Efficiency: 80 Plus Bronze/Gold/Platinum/Titanium',
+        'Modular cables for cleaner builds',
+        'Multiple rails for stable power delivery'
+      ],
+      importance: 'Poor quality PSUs can damage or destroy your entire system',
+      imagePlaceholder: 'psu-image.jpg',
       color: 'from-yellow-500 to-orange-500'
     },
     {
       id: 'cooling',
       icon: Wind,
-      name: 'Refroidissement',
-      fullName: 'Cooling System',
-      details: 'Air: Fans (Noctua, Corsair)',
-      specs: 'Liquid: AIO coolers (for overclocking)',
-      importance: 'Overheating = throttling or shutdowns',
+      name: 'Cooling System',
+      description: 'Dissipates heat from components to prevent thermal throttling and damage.',
+      features: [
+        'Air cooling: Tower coolers, case fans',
+        'Liquid cooling: AIO (All-in-One), custom loops',
+        'Thermal paste/pads for heat transfer',
+        'PWM control for dynamic fan speeds'
+      ],
+      importance: 'Prevents overheating which causes throttling, crashes, or hardware failure',
+      imagePlaceholder: 'cooling-image.jpg',
       color: 'from-cyan-500 to-blue-500'
     }
   ];
@@ -75,168 +119,76 @@ export function InternalComponentsSlide() {
       {/* Content Container */}
       <div className="relative h-full min-h-[600px] overflow-y-auto">
         <div className="p-12">
+          {/* Video Player */}
+          <div className="absolute top-4 right-4 w-64 h-36 z-10">
+            <VideoPlayer placeholder="internal-components-video.mp4" />
+          </div>
+          
           {/* Header */}
           <div className="text-center mb-12">
-            <h2 className="text-white text-5xl mb-4">Composants Internes Principaux</h2>
-            <p className="text-white/80 text-xl">Main Internal Components</p>
+            <h2 className="text-white text-5xl mb-4">Main Internal Components</h2>
+            <p className="text-white/80 text-xl">The Building Blocks of Your PC</p>
             <div className="h-1 w-24 bg-white/50 mx-auto mt-4 rounded-full" />
           </div>
           
-          {/* 3D Visual Reference */}
-          <div className="max-w-5xl mx-auto mb-8">
-            <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-8 border border-white/20">
-              <img
-                src="https://images.unsplash.com/photo-1758159234965-9d259875cf35?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb21wdXRlciUyMGhhcmR3YXJlJTIwY29tcG9uZW50c3xlbnwxfHx8fDE3Njc1MTQ3OTB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                alt="Computer Components"
-                className="w-full h-64 object-cover rounded-xl"
-              />
-            </div>
-          </div>
-          
-          {/* Components Grid */}
-          <div className="max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          {/* Components List */}
+          <div className="max-w-6xl mx-auto space-y-6">
             {components.map((component) => (
               <div
                 key={component.id}
-                onMouseEnter={() => setHoveredComponent(component.id)}
-                onMouseLeave={() => setHoveredComponent(null)}
-                className="group"
+                className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 overflow-hidden hover:bg-white/15 transition-all"
               >
-                <div className={`bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20 transition-all duration-300 h-full ${
-                  hoveredComponent === component.id 
-                    ? 'bg-white/20 scale-105 shadow-2xl' 
-                    : 'hover:bg-white/15'
-                }`}>
-                  {/* Icon */}
-                  <div className={`bg-gradient-to-br ${component.color} rounded-xl p-4 mb-4 inline-block shadow-lg`}>
-                    <component.icon className="w-8 h-8 text-white" />
+                <div className="grid md:grid-cols-3 gap-6 p-6">
+                  {/* Left: Icon & Info */}
+                  <div className="flex flex-col justify-center">
+                    <div className={`bg-gradient-to-br ${component.color} rounded-xl p-4 mb-4 inline-block shadow-lg w-fit`}>
+                      <component.icon className="w-10 h-10 text-white" />
+                    </div>
+                    <h3 className="text-white text-2xl mb-2">{component.name}</h3>
+                    <p className="text-white/80 text-sm mb-4">{component.description}</p>
+                    <div className="bg-white/10 rounded-lg p-3 border border-white/20">
+                      <p className="text-white/70 text-xs mb-1 uppercase tracking-wide">Why It Matters</p>
+                      <p className="text-white text-sm">{component.importance}</p>
+                    </div>
                   </div>
                   
-                  {/* Name */}
-                  <h3 className="text-white text-2xl mb-1">{component.name}</h3>
-                  <p className="text-white/60 text-sm mb-4">{component.fullName}</p>
-                  
-                  {/* Details */}
-                  <div className="space-y-2 mb-4">
-                    <p className="text-white/90 text-sm">{component.details}</p>
-                    <p className="text-white/80 text-xs">{component.specs}</p>
+                  {/* Middle: Image Placeholder */}
+                  <div className="bg-gradient-to-br from-white/5 to-white/10 rounded-xl border-2 border-dashed border-white/30 flex items-center justify-center min-h-[250px]">
+                    <div className="text-center p-6">
+                      <div className="text-5xl mb-3">🖼️</div>
+                      <p className="text-white/60 text-sm mb-2">Image Placeholder</p>
+                      <p className="text-white/40 text-xs font-mono">{component.imagePlaceholder}</p>
+                      <p className="text-white/50 text-xs mt-2">Replace with actual component image</p>
+                    </div>
                   </div>
                   
-                  {/* Importance */}
-                  <div className={`bg-white/10 rounded-xl p-3 border border-white/20 transition-all ${
-                    hoveredComponent === component.id ? 'bg-white/20' : ''
-                  }`}>
-                    <p className="text-white/70 text-xs mb-1 uppercase tracking-wide">Why It Matters</p>
-                    <p className="text-white text-sm">{component.importance}</p>
+                  {/* Right: Features List */}
+                  <div className="flex flex-col justify-center">
+                    <h4 className="text-white/90 text-lg mb-4 font-semibold">Key Specifications:</h4>
+                    <ul className="space-y-3">
+                      {component.features.map((feature, fIndex) => (
+                        <li key={fIndex} className="flex items-start gap-3">
+                          <div className="bg-blue-500/30 rounded-full p-1 mt-0.5">
+                            <div className="w-2 h-2 bg-blue-400 rounded-full" />
+                          </div>
+                          <span className="text-white/90 text-sm">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
               </div>
             ))}
           </div>
           
-          {/* Detailed Comparison Table */}
-          <div className="max-w-6xl mx-auto">
-            <div className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 overflow-hidden">
-              <div className="bg-white/10 p-4 border-b border-white/20">
-                <h3 className="text-white text-xl">Technical Specifications Comparison</h3>
-              </div>
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead>
-                    <tr className="bg-white/5">
-                      <th className="text-left text-white/90 p-4 border-b border-white/10">Component</th>
-                      <th className="text-left text-white/90 p-4 border-b border-white/10">Key Details</th>
-                      <th className="text-left text-white/90 p-4 border-b border-white/10">Impact</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr className="hover:bg-white/5 transition-colors">
-                      <td className="text-white p-4 border-b border-white/10">
-                        <div className="flex items-center gap-2">
-                          <Cpu className="w-5 h-5 text-blue-400" />
-                          <span>CPU</span>
-                        </div>
-                      </td>
-                      <td className="text-white/80 p-4 border-b border-white/10 text-sm">
-                        x86 (Intel/AMD) | ARM | Socket compatibility critical
-                      </td>
-                      <td className="text-white/80 p-4 border-b border-white/10 text-sm">
-                        Foundation of system performance
-                      </td>
-                    </tr>
-                    <tr className="hover:bg-white/5 transition-colors">
-                      <td className="text-white p-4 border-b border-white/10">
-                        <div className="flex items-center gap-2">
-                          <MemoryStick className="w-5 h-5 text-purple-400" />
-                          <span>RAM</span>
-                        </div>
-                      </td>
-                      <td className="text-white/80 p-4 border-b border-white/10 text-sm">
-                        DDR4 (3200MHz) vs DDR5 (4800MHz+) | 8GB–128GB+
-                      </td>
-                      <td className="text-white/80 p-4 border-b border-white/10 text-sm">
-                        Multitasking and application speed
-                      </td>
-                    </tr>
-                    <tr className="hover:bg-white/5 transition-colors">
-                      <td className="text-white p-4 border-b border-white/10">
-                        <div className="flex items-center gap-2">
-                          <CircuitBoard className="w-5 h-5 text-green-400" />
-                          <span>Motherboard</span>
-                        </div>
-                      </td>
-                      <td className="text-white/80 p-4 border-b border-white/10 text-sm">
-                        Chipset determines features | ATX/mATX/ITX form factors
-                      </td>
-                      <td className="text-white/80 p-4 border-b border-white/10 text-sm">
-                        Upgrade paths and expandability
-                      </td>
-                    </tr>
-                    <tr className="hover:bg-white/5 transition-colors">
-                      <td className="text-white p-4 border-b border-white/10">
-                        <div className="flex items-center gap-2">
-                          <HardDrive className="w-5 h-5 text-orange-400" />
-                          <span>Storage</span>
-                        </div>
-                      </td>
-                      <td className="text-white/80 p-4 border-b border-white/10 text-sm">
-                        HDD (slow) | SATA SSD (550MB/s) | NVMe (7000MB/s)
-                      </td>
-                      <td className="text-white/80 p-4 border-b border-white/10 text-sm">
-                        Boot times and data transfer speeds
-                      </td>
-                    </tr>
-                    <tr className="hover:bg-white/5 transition-colors">
-                      <td className="text-white p-4 border-b border-white/10">
-                        <div className="flex items-center gap-2">
-                          <Zap className="w-5 h-5 text-yellow-400" />
-                          <span>PSU</span>
-                        </div>
-                      </td>
-                      <td className="text-white/80 p-4 border-b border-white/10 text-sm">
-                        500W–1000W | 80 Plus certification levels
-                      </td>
-                      <td className="text-white/80 p-4 border-b border-white/10 text-sm">
-                        System stability and efficiency
-                      </td>
-                    </tr>
-                    <tr className="hover:bg-white/5 transition-colors">
-                      <td className="text-white p-4">
-                        <div className="flex items-center gap-2">
-                          <Wind className="w-5 h-5 text-cyan-400" />
-                          <span>Cooling</span>
-                        </div>
-                      </td>
-                      <td className="text-white/80 p-4 text-sm">
-                        Air (fans) vs Liquid (AIO) | Thermal management
-                      </td>
-                      <td className="text-white/80 p-4 text-sm">
-                        Prevents thermal throttling
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+          {/* Summary */}
+          <div className="max-w-6xl mx-auto mt-8">
+            <div className="bg-gradient-to-r from-green-500/20 to-blue-500/20 backdrop-blur-xl rounded-2xl p-6 border-2 border-green-400/30">
+              <h3 className="text-white text-xl mb-3">💡 Pro Tip</h3>
+              <p className="text-white/90">
+                All components must work together harmoniously. A powerful GPU needs adequate CPU power, sufficient RAM, 
+                fast storage, reliable PSU, and effective cooling to perform at its best. Balance is key!
+              </p>
             </div>
           </div>
         </div>

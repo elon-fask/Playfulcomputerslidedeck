@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Maximize2, Minimize2, Clock, Users, Lightbulb, Trophy, CheckCircle, XCircle, Brain } from 'lucide-react';
+import { VideoPlayer } from './VideoPlayer';
 
 export function QuizGameSlide() {
   const [isTheaterMode, setIsTheaterMode] = useState(false);

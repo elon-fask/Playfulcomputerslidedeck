@@ -1,5 +1,6 @@
 import React from 'react';
 import { CheckCircle, TrendingUp, Award } from 'lucide-react';
+import { VideoPlayer } from './VideoPlayer';
 
 export function ConclusionSlide() {
   const keyTakeaways = [
@@ -43,6 +44,11 @@ export function ConclusionSlide() {
       {/* Content Container */}
       <div className="relative h-full min-h-[600px] overflow-y-auto">
         <div className="p-12">
+          {/* Video Player */}
+          <div className="absolute top-4 right-4 w-64 h-36 z-10">
+            <VideoPlayer placeholder="conclusion-video.mp4" />
+          </div>
+          
           {/* Header */}
           <div className="text-center mb-12">
             <div className="text-6xl mb-4">🎯</div>

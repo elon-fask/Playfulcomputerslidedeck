@@ -1,5 +1,6 @@
 import React from 'react';
 import { TrendingUp, Zap, Clock } from 'lucide-react';
+import { VideoPlayer } from './VideoPlayer';
 
 export function CaseStudySlide() {
   const upgrade = {
@@ -46,10 +47,15 @@ export function CaseStudySlide() {
       {/* Content Container */}
       <div className="relative h-full min-h-[600px] overflow-y-auto">
         <div className="p-12">
+          {/* Video Player */}
+          <div className="absolute top-4 right-4 w-64 h-36 z-10">
+            <VideoPlayer placeholder="case-study-video.mp4" />
+          </div>
+          
           {/* Header */}
           <div className="text-center mb-12">
-            <h2 className="text-white text-5xl mb-4">Étude de Cas</h2>
-            <p className="text-white/80 text-xl">Case Study: Real-World Upgrade Impact</p>
+            <h2 className="text-white text-5xl mb-4">Case Study</h2>
+            <p className="text-white/80 text-xl">Real-World Upgrade Impact</p>
             <div className="h-1 w-24 bg-white/50 mx-auto mt-4 rounded-full" />
           </div>
           
