@@ -1,5 +1,6 @@
 import React from 'react';
 import { TrendingUp, BarChart3 } from 'lucide-react';
+import { VideoPlayer } from './VideoPlayer';
 
 export function ComparisonSlide() {
   const comparisons = [
@@ -64,10 +65,15 @@ export function ComparisonSlide() {
       {/* Content Container */}
       <div className="relative h-full min-h-[600px] overflow-y-auto">
         <div className="p-12">
+          {/* Video Player */}
+          <div className="absolute top-4 right-4 w-64 h-36 z-10">
+            <VideoPlayer placeholder="comparison-slide-video.mp4" />
+          </div>
+          
           {/* Header */}
           <div className="text-center mb-12">
-            <h2 className="text-white text-5xl mb-4">Comparaison des Technologies</h2>
-            <p className="text-white/80 text-xl">Technology Comparison: Making Informed Decisions</p>
+            <h2 className="text-white text-5xl mb-4">Technology Comparison</h2>
+            <p className="text-white/80 text-xl">Making Informed Decisions</p>
             <div className="h-1 w-24 bg-white/50 mx-auto mt-4 rounded-full" />
           </div>
           

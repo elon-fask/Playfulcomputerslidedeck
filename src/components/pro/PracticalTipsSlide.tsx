@@ -1,5 +1,6 @@
 import React from 'react';
 import { CheckCircle, XCircle, AlertTriangle } from 'lucide-react';
+import { VideoPlayer } from './VideoPlayer';
 
 export function PracticalTipsSlide() {
   const tips = {
@@ -62,10 +63,15 @@ export function PracticalTipsSlide() {
       {/* Content Container */}
       <div className="relative h-full min-h-[600px] overflow-y-auto">
         <div className="p-12">
+          {/* Video Player */}
+          <div className="absolute top-4 right-4 w-64 h-36 z-10">
+            <VideoPlayer placeholder="practical-tips-video.mp4" />
+          </div>
+          
           {/* Header */}
           <div className="text-center mb-12">
-            <h2 className="text-white text-5xl mb-4">Conseils Pratiques</h2>
-            <p className="text-white/80 text-xl">Practical Tips: Building & Maintaining Your System</p>
+            <h2 className="text-white text-5xl mb-4">Practical Tips</h2>
+            <p className="text-white/80 text-xl">Building & Maintaining Your System</p>
             <div className="h-1 w-24 bg-white/50 mx-auto mt-4 rounded-full" />
           </div>
           

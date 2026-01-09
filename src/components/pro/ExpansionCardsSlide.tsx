@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Volume2, Wifi, Video, Database, Usb } from 'lucide-react';
+import { VideoPlayer } from './VideoPlayer';
 
 export function ExpansionCardsSlide() {
   const [selectedCard, setSelectedCard] = useState<number | null>(null);
@@ -11,6 +12,12 @@ export function ExpansionCardsSlide() {
       subtitle: 'Carte Son',
       description: 'Processes audio signals with high fidelity. Essential for professional audio work and immersive gaming experiences.',
       useCase: 'Gaming, music production, studio recording',
+      features: [
+        'High-quality audio processing',
+        'Low latency for real-time monitoring',
+        'Multiple input/output channels',
+        'Hardware acceleration for audio effects'
+      ],
       color: 'from-blue-500 to-cyan-500'
     },
     {
@@ -19,30 +26,54 @@ export function ExpansionCardsSlide() {
       subtitle: 'Carte Réseau',
       description: 'Enables wired (Ethernet) or wireless (Wi-Fi) connectivity. Critical for networking and online operations.',
       useCase: 'Servers, online gaming, enterprise networking',
+      features: [
+        'Gigabit/Multi-gigabit Ethernet support',
+        'Wi-Fi 6/6E wireless connectivity',
+        'Advanced network protocols',
+        'Wake-on-LAN capabilities'
+      ],
       color: 'from-purple-500 to-pink-500'
     },
     {
       icon: Video,
-      title: 'Carte Capture',
-      subtitle: 'Capture Card',
+      title: 'Capture Card',
+      subtitle: 'Carte Capture',
       description: 'Captures and processes video/audio signals in real-time. Used extensively in streaming and content creation.',
       useCase: 'Twitch streaming, video editing, broadcasting',
+      features: [
+        'Real-time video capture',
+        'HDMI/SDI input support',
+        'Hardware encoding (H.264/HEVC)',
+        'Passthrough mode for zero-latency gaming'
+      ],
       color: 'from-red-500 to-orange-500'
     },
     {
       icon: Database,
-      title: 'Carte RAID',
-      subtitle: 'RAID Controller',
+      title: 'RAID Controller',
+      subtitle: 'Carte RAID',
       description: 'Manages multiple drives for enhanced performance (RAID 0) or data redundancy (RAID 1). Enterprise-grade reliability.',
       useCase: 'Data centers, NAS systems, critical storage',
+      features: [
+        'Multiple RAID levels (0, 1, 5, 6, 10)',
+        'Hardware-based parity calculation',
+        'Hot-swap drive support',
+        'Battery backup for cache protection'
+      ],
       color: 'from-green-500 to-emerald-500'
     },
     {
       icon: Usb,
-      title: 'Carte USB',
-      subtitle: 'USB Expansion',
+      title: 'USB Expansion',
+      subtitle: 'Carte USB',
       description: 'Adds extra USB ports (Type-A/C) to systems. Useful for devices with limited native port availability.',
       useCase: 'Connecting peripherals (keyboards, mice, external drives)',
+      features: [
+        'Multiple USB 3.2 ports',
+        'USB Type-C with Power Delivery',
+        'PCIe-based for maximum bandwidth',
+        'Individual port power management'
+      ],
       color: 'from-yellow-500 to-orange-500'
     }
   ];
@@ -55,12 +86,18 @@ export function ExpansionCardsSlide() {
       {/* Content Container */}
       <div className="relative h-full min-h-[600px] overflow-y-auto">
         <div className="p-12">
+          {/* Video Player */}
+          <div className="absolute top-4 right-4 w-64 h-36 z-10 hidden lg:block">
+            <VideoPlayer placeholder="expansion-cards-video.mp4" />
+          </div>
+
           {/* Header */}
           <div className="text-center mb-12">
             <h2 className="text-white text-5xl mb-4">Cartes d'Extension</h2>
             <p className="text-white/80 text-xl">Expansion Cards: Plug-and-Play Upgrades</p>
             <div className="h-1 w-24 bg-white/50 mx-auto mt-4 rounded-full" />
           </div>
+
           {/* Motherboard Diagram */}
           <div className="max-w-5xl mx-auto mb-8">
             <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-8 border border-white/20">
@@ -99,11 +136,26 @@ export function ExpansionCardsSlide() {
                     {card.description}
                   </p>
 
-                  {/* Use Case - Shown on selection */}
+                  {/* Use Case & Features - Shown on selection */}
                   {selectedCard === index && (
-                    <div className="bg-white/10 rounded-xl p-4 mt-4 border border-white/30 animate-fadeIn">
-                      <p className="text-white/70 text-xs mb-2 uppercase tracking-wide">Example Use Case</p>
-                      <p className="text-white text-sm">{card.useCase}</p>
+                    <div className="animate-fadeIn space-y-4">
+                      <div className="bg-white/10 rounded-xl p-4 border border-white/30">
+                        <p className="text-white/70 text-xs mb-2 uppercase tracking-wide">Example Use Case</p>
+                        <p className="text-white text-sm">{card.useCase}</p>
+                      </div>
+
+                      {/* Integrated Features from Remote */}
+                      <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+                        <p className="text-white/70 text-xs mb-2 uppercase tracking-wide">Key Features</p>
+                        <ul className="space-y-1">
+                          {card.features.map((feature, idx) => (
+                            <li key={idx} className="flex items-start gap-2 text-xs text-white/80">
+                              <span className="text-green-400 mt-0.5">•</span>
+                              <span>{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
                   )}
 
@@ -117,7 +169,7 @@ export function ExpansionCardsSlide() {
           </div>
 
           {/* Comparison Table */}
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-6xl mx-auto mb-8">
             <div className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full">
@@ -159,6 +211,18 @@ export function ExpansionCardsSlide() {
               </div>
             </div>
           </div>
+
+          {/* Pro Tip (From Remote) */}
+          <div className="max-w-6xl mx-auto">
+            <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-xl rounded-2xl p-6 border-2 border-blue-400/30">
+              <h3 className="text-white text-xl mb-3">💡 Pro Tip</h3>
+              <p className="text-white/90">
+                Expansion cards slot into your motherboard's PCIe slots, extending its capabilities without replacing the entire system.
+                Always check PCIe lane compatibility and power requirements before purchasing.
+              </p>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

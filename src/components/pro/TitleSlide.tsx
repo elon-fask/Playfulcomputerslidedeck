@@ -1,5 +1,6 @@
 import React from 'react';
 import { Cpu } from 'lucide-react';
+import { VideoPlayer } from './VideoPlayer';
 
 export function TitleSlide() {
   return (
@@ -12,6 +13,11 @@ export function TitleSlide() {
       
       {/* Content */}
       <div className="relative h-full min-h-[600px] flex flex-col items-center justify-center p-12 text-white">
+        {/* Video Player */}
+        <div className="absolute top-4 right-4 w-64 h-36 z-10">
+          <VideoPlayer placeholder="title-slide-video.mp4" />
+        </div>
+        
         <div className="text-center space-y-8">
           {/* Icon */}
           <div className="flex justify-center mb-6">
