@@ -3,15 +3,54 @@ import { Play, Pause } from 'lucide-react';
 
 interface VideoPlayerProps {
   videoUrl?: string;
+  youtubeUrl?: string;
   placeholder?: string;
+  startTime?: number;
+  endTime?: number;
 }
 
-export function VideoPlayer({ videoUrl = '', placeholder = 'video-placeholder.mp4' }: VideoPlayerProps) {
+export function VideoPlayer({ 
+  videoUrl = '', 
+  youtubeUrl = '',
+  placeholder = 'video-placeholder.mp4',
+  startTime = 0,
+  endTime
+}: VideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showControls, setShowControls] = useState(false);
 
+  // Extract YouTube video ID from URL
+  const getYouTubeId = (url: string) => {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+  };
+
+  const youtubeId = youtubeUrl ? getYouTubeId(youtubeUrl) : null;
+
+  // Build YouTube embed URL with parameters
+  const getYouTubeEmbedUrl = () => {
+    if (!youtubeId) return '';
+    
+    const params = new URLSearchParams({
+      autoplay: '1',
+      mute: '1',
+      loop: '1',
+      playlist: youtubeId, // Required for loop to work
+      controls: '0',
+      modestbranding: '1',
+      rel: '0',
+      start: startTime.toString(),
+      ...(endTime && { end: endTime.toString() })
+    });
+    
+    return `https://www.youtube.com/embed/${youtubeId}?${params.toString()}`;
+  };
+
   useEffect(() => {
+    if (youtubeId) return; // YouTube iframe handles its own playback
+    
     const video = videoRef.current;
     if (!video) return;
 
@@ -40,9 +79,11 @@ export function VideoPlayer({ videoUrl = '', placeholder = 'video-placeholder.mp
         setIsPlaying(false);
       }
     };
-  }, []);
+  }, [youtubeId]);
 
   const togglePlay = () => {
+    if (youtubeId) return; // YouTube controls handled by iframe
+    
     if (videoRef.current) {
       if (isPlaying) {
         videoRef.current.pause();
@@ -63,6 +104,25 @@ export function VideoPlayer({ videoUrl = '', placeholder = 'video-placeholder.mp
     }
   };
 
+  // Render YouTube iframe if YouTube URL is provided
+  if (youtubeId) {
+    return (
+      <div className="relative rounded-xl overflow-hidden">
+        <iframe
+          className="w-full h-full"
+          src={getYouTubeEmbedUrl()}
+          allow="autoplay; encrypted-media"
+          allowFullScreen
+          style={{ border: 'none' }}
+        />
+        <div className="absolute top-2 left-2 bg-red-600/80 backdrop-blur-sm px-3 py-1 rounded-full">
+          <p className="text-white text-xs font-semibold">YouTube Video</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Render regular video player
   return (
     <div 
       className="relative rounded-xl overflow-hidden cursor-pointer group"

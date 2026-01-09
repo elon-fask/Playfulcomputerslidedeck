@@ -15,7 +15,11 @@ export function TitleSlide() {
       <div className="relative h-full min-h-[600px] flex flex-col items-center justify-center p-12 text-white">
         {/* Video Player */}
         <div className="absolute top-4 right-4 w-64 h-36 z-10">
-          <VideoPlayer placeholder="title-slide-video.mp4" />
+          <VideoPlayer 
+            youtubeUrl="https://youtu.be/d86ws7mQYIg?si=ecmWlXx-IleQGJiy"
+            startTime={0}
+            endTime={20}
+          />
         </div>
         
         <div className="text-center space-y-8">
