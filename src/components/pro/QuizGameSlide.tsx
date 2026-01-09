@@ -9,11 +9,11 @@ export function QuizGameSlide() {
   const [showExplanation, setShowExplanation] = useState(false);
   const [usedFiftyFifty, setUsedFiftyFifty] = useState(false);
   const [eliminatedOptions, setEliminatedOptions] = useState<string[]>([]);
-  const [timeLeft, setTimeLeft] = useState(15);
+  const [timeLeft, setTimeLeft] = useState(25);
   const [timerActive, setTimerActive] = useState(true);
   const [quizComplete, setQuizComplete] = useState(false);
   const [showAskClass, setShowAskClass] = useState(false);
-  
+
   const questions = [
     // Section 1: Cartes d'Extension
     {
@@ -233,14 +233,14 @@ export function QuizGameSlide() {
 
   const handleAnswer = (answer: string) => {
     if (selectedAnswer || !timerActive) return;
-    
+
     setSelectedAnswer(answer);
     setTimerActive(false);
-    
+
     if (answer === questions[currentQuestion].correct) {
       setScore(score + 1);
     }
-    
+
     setShowExplanation(true);
   };
 
@@ -273,11 +273,11 @@ export function QuizGameSlide() {
 
   const useFiftyFifty = () => {
     if (usedFiftyFifty || showExplanation) return;
-    
+
     const correctAnswer = questions[currentQuestion].correct;
     const allOptions = Object.keys(questions[currentQuestion].options);
     const wrongOptions = allOptions.filter(opt => opt !== correctAnswer);
-    
+
     // Randomly eliminate 2 wrong options
     const toEliminate = wrongOptions.sort(() => Math.random() - 0.5).slice(0, 2);
     setEliminatedOptions(toEliminate);
@@ -294,12 +294,11 @@ export function QuizGameSlide() {
   const totalVotes = currentQ.classVotes ? Object.values(currentQ.classVotes).reduce((a, b) => a + b, 0) : 0;
 
   return (
-    <div className={`relative rounded-3xl overflow-hidden shadow-2xl transition-all duration-300 ${
-      isTheaterMode ? 'fixed inset-4 z-50' : 'min-h-[600px]'
-    }`}>
+    <div className={`relative rounded-3xl overflow-hidden shadow-2xl transition-all duration-300 ${isTheaterMode ? 'fixed inset-4 z-50' : 'min-h-[600px]'
+      }`}>
       {/* Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#1E90FF] via-purple-600 to-[#FF4500]" />
-      
+
       {/* Theater Mode Toggle */}
       <button
         onClick={() => setIsTheaterMode(!isTheaterMode)}
@@ -311,7 +310,7 @@ export function QuizGameSlide() {
           <Maximize2 className="w-6 h-6 text-white" />
         )}
       </button>
-      
+
       {/* Content Container */}
       <div className="relative h-full min-h-[600px] overflow-y-auto">
         <div className="p-12">
@@ -326,7 +325,7 @@ export function QuizGameSlide() {
                 <p className="text-white/80 text-xl">Test Your Knowledge!</p>
                 <div className="h-1 w-24 bg-white/50 mx-auto mt-4 rounded-full" />
               </div>
-              
+
               {/* Score & Progress Bar */}
               <div className="max-w-5xl mx-auto mb-8">
                 <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20">
@@ -342,10 +341,10 @@ export function QuizGameSlide() {
                       </span>
                     </div>
                   </div>
-                  
+
                   {/* Progress Bar */}
                   <div className="bg-white/10 rounded-full h-3 overflow-hidden">
-                    <div 
+                    <div
                       className="bg-gradient-to-r from-green-500 to-blue-500 h-full transition-all duration-300"
                       style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
                     />
@@ -355,40 +354,38 @@ export function QuizGameSlide() {
                   </p>
                 </div>
               </div>
-              
+
               {/* Lifelines */}
               <div className="max-w-5xl mx-auto mb-6">
                 <div className="flex gap-4 justify-center">
                   <button
                     onClick={useFiftyFifty}
                     disabled={usedFiftyFifty || showExplanation}
-                    className={`flex items-center gap-2 px-6 py-3 rounded-full border-2 transition-all ${
-                      usedFiftyFifty || showExplanation
+                    className={`flex items-center gap-2 px-6 py-3 rounded-full border-2 transition-all ${usedFiftyFifty || showExplanation
                         ? 'bg-gray-500/20 border-gray-400/30 opacity-50 cursor-not-allowed'
                         : 'bg-yellow-500/20 border-yellow-400/50 hover:bg-yellow-500/30 cursor-pointer'
-                    }`}
+                      }`}
                   >
                     <Lightbulb className="w-5 h-5 text-yellow-400" />
                     <span className="text-white">50:50</span>
                   </button>
-                  
+
                   <button
                     onClick={toggleAskClass}
                     disabled={showExplanation}
-                    className={`flex items-center gap-2 px-6 py-3 rounded-full border-2 transition-all ${
-                      showExplanation
+                    className={`flex items-center gap-2 px-6 py-3 rounded-full border-2 transition-all ${showExplanation
                         ? 'bg-gray-500/20 border-gray-400/30 opacity-50 cursor-not-allowed'
                         : showAskClass
-                        ? 'bg-blue-500/30 border-blue-400/50'
-                        : 'bg-blue-500/20 border-blue-400/50 hover:bg-blue-500/30 cursor-pointer'
-                    }`}
+                          ? 'bg-blue-500/30 border-blue-400/50'
+                          : 'bg-blue-500/20 border-blue-400/50 hover:bg-blue-500/30 cursor-pointer'
+                      }`}
                   >
                     <Users className="w-5 h-5 text-blue-400" />
                     <span className="text-white">Ask the Class</span>
                   </button>
                 </div>
               </div>
-              
+
               {/* Question Card */}
               <div className="max-w-5xl mx-auto">
                 <div className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 overflow-hidden">
@@ -398,13 +395,13 @@ export function QuizGameSlide() {
                       {currentQ.section}
                     </p>
                   </div>
-                  
+
                   {/* Question */}
                   <div className="p-8">
                     <h3 className="text-white text-2xl mb-8 text-center">
                       {currentQ.question}
                     </h3>
-                    
+
                     {/* Ask the Class Results */}
                     {showAskClass && (
                       <div className="mb-6 bg-blue-500/20 backdrop-blur-sm rounded-xl p-4 border border-blue-400/30">
@@ -417,7 +414,7 @@ export function QuizGameSlide() {
                             <div key={option} className="flex items-center gap-3">
                               <span className="text-white/90 text-sm w-8">{option}:</span>
                               <div className="flex-1 bg-white/10 rounded-full h-2 overflow-hidden">
-                                <div 
+                                <div
                                   className="bg-blue-400 h-full rounded-full transition-all"
                                   style={{ width: `${(votes / totalVotes) * 100}%` }}
                                 />
@@ -428,7 +425,7 @@ export function QuizGameSlide() {
                         </div>
                       </div>
                     )}
-                    
+
                     {/* Options */}
                     <div className="grid md:grid-cols-2 gap-4">
                       {Object.entries(currentQ.options).map(([key, value]) => {
@@ -436,32 +433,30 @@ export function QuizGameSlide() {
                         const isSelected = selectedAnswer === key;
                         const isCorrect = key === currentQ.correct;
                         const showFeedback = showExplanation;
-                        
+
                         return (
                           <button
                             key={key}
                             onClick={() => handleAnswer(key)}
                             disabled={isEliminated || showExplanation || !timerActive}
-                            className={`p-5 rounded-xl text-left transition-all border-2 ${
-                              isEliminated
+                            className={`p-5 rounded-xl text-left transition-all border-2 ${isEliminated
                                 ? 'opacity-30 cursor-not-allowed bg-gray-500/20 border-gray-400/30'
                                 : showFeedback && isCorrect
-                                ? 'bg-green-500/30 border-green-400 scale-105'
-                                : showFeedback && isSelected && !isCorrect
-                                ? 'bg-red-500/30 border-red-400'
-                                : showFeedback
-                                ? 'bg-white/5 border-white/20 opacity-50'
-                                : 'bg-white/10 border-white/30 hover:bg-white/20 hover:scale-105 cursor-pointer'
-                            }`}
+                                  ? 'bg-green-500/30 border-green-400 scale-105'
+                                  : showFeedback && isSelected && !isCorrect
+                                    ? 'bg-red-500/30 border-red-400'
+                                    : showFeedback
+                                      ? 'bg-white/5 border-white/20 opacity-50'
+                                      : 'bg-white/10 border-white/30 hover:bg-white/20 hover:scale-105 cursor-pointer'
+                              }`}
                           >
                             <div className="flex items-center gap-3">
-                              <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold border-2 ${
-                                showFeedback && isCorrect
+                              <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold border-2 ${showFeedback && isCorrect
                                   ? 'bg-green-500 border-green-400 text-white'
                                   : showFeedback && isSelected && !isCorrect
-                                  ? 'bg-red-500 border-red-400 text-white'
-                                  : 'bg-white/20 border-white/40 text-white'
-                              }`}>
+                                    ? 'bg-red-500 border-red-400 text-white'
+                                    : 'bg-white/20 border-white/40 text-white'
+                                }`}>
                                 {key}
                               </div>
                               <p className="text-white flex-1">{value}</p>
@@ -476,14 +471,13 @@ export function QuizGameSlide() {
                         );
                       })}
                     </div>
-                    
+
                     {/* Explanation */}
                     {showExplanation && (
-                      <div className={`mt-6 p-6 rounded-xl border-2 ${
-                        selectedAnswer === currentQ.correct
+                      <div className={`mt-6 p-6 rounded-xl border-2 ${selectedAnswer === currentQ.correct
                           ? 'bg-green-500/20 border-green-400/50'
                           : 'bg-yellow-500/20 border-yellow-400/50'
-                      }`}>
+                        }`}>
                         <div className="flex items-start gap-3 mb-3">
                           {selectedAnswer === currentQ.correct ? (
                             <>
@@ -525,13 +519,13 @@ export function QuizGameSlide() {
                   You scored <span className="font-bold text-green-400">{score}</span> out of <span className="font-bold">{questions.length}</span>
                 </p>
                 <p className="text-white/80 text-2xl mb-6">
-                  {score === questions.length 
+                  {score === questions.length
                     ? 'Perfect score! You\'re a PC expert! 🏆'
                     : score >= questions.length * 0.8
-                    ? 'Excellent work! You really know your stuff!'
-                    : score >= questions.length * 0.6
-                    ? 'Good job! Keep learning and you\'ll be an expert soon!'
-                    : 'Nice try! Review the material and try again!'}
+                      ? 'Excellent work! You really know your stuff!'
+                      : score >= questions.length * 0.6
+                        ? 'Good job! Keep learning and you\'ll be an expert soon!'
+                        : 'Nice try! Review the material and try again!'}
                 </p>
                 <div className="bg-white/5 rounded-xl p-6 mb-8">
                   <p className="text-white/70 text-lg">
@@ -539,7 +533,7 @@ export function QuizGameSlide() {
                   </p>
                 </div>
               </div>
-              
+
               <button
                 onClick={restartQuiz}
                 className="px-8 py-4 bg-gradient-to-r from-green-500 to-blue-500 text-white rounded-full text-xl hover:scale-105 transition-all shadow-lg"

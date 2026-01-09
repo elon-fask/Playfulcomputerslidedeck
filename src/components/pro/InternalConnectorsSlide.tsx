@@ -3,7 +3,7 @@ import { Cable, HardDrive, Zap, Fan } from 'lucide-react';
 
 export function InternalConnectorsSlide() {
   const [selectedConnector, setSelectedConnector] = useState<string | null>(null);
-  
+
   const connectors = [
     {
       id: 'pcie',
@@ -69,7 +69,7 @@ export function InternalConnectorsSlide() {
     <div className="relative min-h-[600px] rounded-3xl overflow-hidden shadow-2xl">
       {/* Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#1E90FF] via-purple-600 to-[#FF4500]" />
-      
+
       {/* Content Container */}
       <div className="relative h-full min-h-[600px] overflow-y-auto">
         <div className="p-12">
@@ -79,7 +79,6 @@ export function InternalConnectorsSlide() {
             <p className="text-white/80 text-xl">Internal Connectors: The Nervous System</p>
             <div className="h-1 w-24 bg-white/50 mx-auto mt-4 rounded-full" />
           </div>
-          
           {/* Motherboard Diagram */}
           <div className="max-w-5xl mx-auto mb-8">
             <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-8 border border-white/20">
@@ -91,18 +90,16 @@ export function InternalConnectorsSlide() {
               <p className="text-white/70 text-center mt-4 text-sm">Color-coded paths show data and power flow</p>
             </div>
           </div>
-          
           {/* Connectors */}
           <div className="max-w-6xl mx-auto space-y-6 mb-8">
             {connectors.map((connector) => (
               <div key={connector.id} className="group">
-                <div 
+                <div
                   onClick={() => setSelectedConnector(selectedConnector === connector.id ? null : connector.id)}
-                  className={`bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 transition-all duration-300 cursor-pointer ${
-                    selectedConnector === connector.id 
-                      ? 'bg-white/20 shadow-2xl' 
+                  className={`bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 transition-all duration-300 cursor-pointer ${selectedConnector === connector.id
+                      ? 'bg-white/20 shadow-2xl'
                       : 'hover:bg-white/15'
-                  }`}
+                    }`}
                 >
                   {/* Header */}
                   <div className="p-6 flex items-center gap-4">
@@ -117,12 +114,12 @@ export function InternalConnectorsSlide() {
                       {selectedConnector === connector.id ? '▲ Collapse' : '▼ Expand'}
                     </div>
                   </div>
-                  
+
                   {/* Expanded Content */}
                   {selectedConnector === connector.id && (
                     <div className="px-6 pb-6 space-y-3">
                       {connector.slots.map((slot, index) => (
-                        <div 
+                        <div
                           key={index}
                           className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 hover:bg-white/15 transition-all"
                         >
@@ -141,7 +138,7 @@ export function InternalConnectorsSlide() {
               </div>
             ))}
           </div>
-          
+
           {/* Comparison Table */}
           <div className="max-w-6xl mx-auto">
             <div className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 overflow-hidden">
@@ -188,7 +185,7 @@ export function InternalConnectorsSlide() {
               </div>
             </div>
           </div>
-          
+
           {/* Pro Tip */}
           <div className="max-w-6xl mx-auto mt-8">
             <div className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 backdrop-blur-xl rounded-2xl p-6 border-2 border-yellow-500/30">
